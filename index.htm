@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Himalayan Java Coffee — Itahari, Nepal | Nepal's First Specialty Coffee Since 1999</title>
+<meta name="description" content="Himalayan Java Coffee, Itahari — Nepal's first specialty coffee house since 1999. Brew bar, handcrafted espresso, artisan food, and Nepali Arabica beans from the Himalayan foothills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,700&family=DM+Sans:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --espresso:   #1a0f05;
+  --coffee:     #2e1a0e;
+  --roast:      #4a2c14;
+  --caramel:    #b5722a;
+  --latte:      #d4a574;
+  --cream:      #f5ede0;
+  --foam:       #fdf6ed;
+  --white:      #ffffff;
+  --smoke:      rgba(245,237,224,0.06);
+  --smokeMid:   rgba(245,237,224,0.12);
+  --smokeHigh:  rgba(245,237,224,0.22);
+  --line:       rgba(245,237,224,0.1);
+  --lineGold:   rgba(181,114,42,0.3);
+  --green:      #3d5a3e;
+  --red:        #9b2335;
+  --serif:      'Playfair Display', Georgia, serif;
+  --sans:       'DM Sans', sans-serif;
+  --bask:       'Libre Baskerville', serif;
+  --trans:      all 0.38s cubic-bezier(0.4,0,0.2,1);
+}
+
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:var(--espresso);
+  color:var(--cream);
+  font-family:var(--sans);
+  overflow-x:hidden;
+  line-height:1.6;
+  cursor:none;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+input,textarea,select{font-family:var(--sans);color:var(--cream);background:transparent;border:none;outline:none}
+input::placeholder,textarea::placeholder{color:rgba(245,237,224,0.3)}
+select option{background:var(--coffee)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--espresso)}
+::-webkit-scrollbar-thumb{background:var(--caramel)}
+
+#cur-ring,#cur-dot{
+  position:fixed;top:0;left:0;border-radius:50%;
+  pointer-events:none;z-index:99999;
+  transform:translate(-50%,-50%);will-change:transform;
+}
+#cur-ring{
+  width:36px;height:36px;
+  border:1.5px solid rgba(181,114,42,0.5);
+  transition:width .28s,height .28s,border-color .28s,background .28s;
+}
+#cur-dot{
+  width:6px;height:6px;
+  background:var(--caramel);
+  transition:width .15s,height .15s;
+}
+.hover-cur #cur-ring{width:52px;height:52px;border-color:var(--caramel);background:rgba(181,114,42,0.08)}
+
+
+body::after{
+  content:'';
+  position:fixed;inset:0;z-index:1;
+  pointer-events:none;opacity:.028;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:128px;
+}
+
+
+#bg-canvas{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;opacity:.6;
+}
+
+
+#loader{
+  position:fixed;inset:0;z-index:10000;
+  background:var(--espresso);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;
+  transition:opacity 1s,visibility 1s;
+}
+#loader.out{opacity:0;visibility:hidden}
+.ld-steam{
+  display:flex;gap:8px;align-items:flex-end;height:50px;
+}
+.ld-steam-line{
+  width:2px;background:linear-gradient(var(--caramel),transparent);
+  animation:steamRise 1.4s ease-in-out infinite;
+  border-radius:2px;
+}
+.ld-steam-line:nth-child(1){height:32px;animation-delay:0s}
+.ld-steam-line:nth-child(2){height:44px;animation-delay:.2s}
+.ld-steam-line:nth-child(3){height:28px;animation-delay:.4s}
+@keyframes steamRise{
+  0%,100%{transform:translateY(0) scaleX(1);opacity:.9}
+  50%{transform:translateY(-8px) scaleX(1.3);opacity:.3}
+}
+.ld-cup{font-size:48px;animation:cupPulse 1.8s ease-in-out infinite}
+@keyframes cupPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.ld-brand{
+  font-family:var(--serif);font-size:clamp(22px,5vw,38px);
+  font-weight:700;letter-spacing:0.04em;color:var(--latte);
+}
+.ld-sub{
+  font-family:var(--sans);font-size:11px;letter-spacing:.5em;text-transform:uppercase;
+  color:rgba(245,237,224,.4);
+}
+.ld-track{width:180px;height:1px;background:rgba(255,255,255,.07);position:relative;overflow:hidden}
+.ld-prog{
+  position:absolute;top:0;left:0;height:100%;
+  background:linear-gradient(90deg,var(--roast),var(--caramel),var(--latte));
+  width:0%;transition:width 1.8s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 12px var(--caramel);
+}
+
+
+#page-wipe{
+  position:fixed;inset:0;z-index:600;
+  display:grid;grid-template-columns:repeat(6,1fr);
+  pointer-events:none;
+}
+.wc{
+  height:100%;background:var(--coffee);
+  transform:scaleY(0);
+}
+#page-wipe.wi .wc{animation:wIn .48s cubic-bezier(.77,0,.175,1) forwards}
+#page-wipe.wo .wc{animation:wOut .48s cubic-bezier(.77,0,.175,1) forwards}
+.wc:nth-child(1){animation-delay:0s!important}
+.wc:nth-child(2){animation-delay:.04s!important}
+.wc:nth-child(3){animation-delay:.08s!important}
+.wc:nth-child(4){animation-delay:.12s!important}
+.wc:nth-child(5){animation-delay:.16s!important}
+.wc:nth-child(6){animation-delay:.2s!important}
+@keyframes wIn{from{transform:scaleY(0);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
+@keyframes wOut{from{transform:scaleY(1);transform-origin:top}to{transform:scaleY(0);transform-origin:top}}
+
+
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:30px 60px;
+  transition:var(--trans);
+}
+#nav.solid{
+  padding:14px 60px;
+  background:rgba(26,15,5,.94);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--line);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:14px;cursor:pointer;
+}
+.nav-logo-icon{font-size:28px}
+.nav-logo-text{
+  font-family:var(--serif);font-size:22px;font-weight:700;
+  color:var(--latte);letter-spacing:.01em;
+  text-shadow:0 0 30px rgba(212,165,116,.4);
+  transition:var(--trans);
+}
+.nav-logo-text span{color:var(--caramel)}
+.nav-logo:hover .nav-logo-text{text-shadow:0 0 50px rgba(212,165,116,.7)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nl{
+  background:none;border:none;
+  font-family:var(--sans);font-size:12px;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(245,237,224,.5);padding:10px 16px;
+  transition:var(--trans);position:relative;
+}
+.nl::after{
+  content:'';position:absolute;bottom:5px;left:16px;right:16px;height:1px;
+  background:var(--caramel);transform:scaleX(0);transition:transform .3s;
+}
+.nl:hover,.nl.active{color:var(--latte)}
+.nl:hover::after,.nl.active::after{transform:scaleX(1)}
+.nav-order{
+  background:var(--caramel);color:var(--espresso);border:none;
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  padding:11px 26px;transition:var(--trans);position:relative;overflow:hidden;
+}
+.nav-order::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);transform:translateX(-100%);transition:transform .3s}
+.nav-order:hover::before{transform:translateX(0)}
+.nav-order:hover{background:var(--latte);box-shadow:0 0 28px rgba(181,114,42,.45)}
+.nav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.nav-ham span{display:block;width:22px;height:1.5px;background:var(--latte);transition:var(--trans)}
+
+#mob-menu{
+  position:fixed;inset:0;z-index:800;
+  background:rgba(26,15,5,.98);
+  backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transform:translateX(100%);
+  transition:transform .45s cubic-bezier(.77,0,.175,1);
+}
+#mob-menu.open{transform:translateX(0)}
+.mob-lnk{
+  font-family:var(--serif);font-size:clamp(34px,7vw,60px);
+  font-weight:400;font-style:italic;color:rgba(245,237,224,.4);
+  background:none;border:none;padding:12px 40px;width:100%;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:var(--trans);
+}
+.mob-lnk:hover{color:var(--latte)}
+.mob-x{
+  position:absolute;top:22px;right:44px;background:none;border:none;
+  color:rgba(245,237,224,.4);font-size:26px;transition:var(--trans);
+}
+.mob-x:hover{color:var(--latte)}
+
+#pw{position:relative;z-index:10}
+.page{min-height:100vh;display:none;animation:pgIn .6s cubic-bezier(.4,0,.2,1) forwards}
+.page.active{display:block}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+.wrap{max-width:1300px;margin:0 auto;padding:0 60px}
+.sec-label{
+  font-family:var(--sans);font-size:10px;font-weight:600;
+  letter-spacing:.48em;text-transform:uppercase;color:var(--caramel);
+  display:flex;align-items:center;gap:14px;margin-bottom:14px;
+}
+.sec-label::before{content:'';display:block;width:28px;height:1px;background:var(--caramel)}
+.sec-title{
+  font-family:var(--serif);font-size:clamp(38px,5vw,76px);
+  font-weight:700;line-height:.95;letter-spacing:-.02em;
+}
+.sec-title em{color:var(--caramel);font-style:italic}
+.sec-body{
+  font-family:var(--bask);font-size:17px;font-weight:400;
+  font-style:italic;color:rgba(245,237,224,.65);
+  line-height:1.8;max-width:520px;
+}
+
+
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rev.in{opacity:1;transform:translateY(0)}
+.rev-l{opacity:0;transform:translateX(-28px);transition:opacity .7s ease,transform .7s ease}
+.rev-l.in{opacity:1;transform:translateX(0)}
+.rev-r{opacity:0;transform:translateX(28px);transition:opacity .7s ease,transform .7s ease}
+.rev-r.in{opacity:1;transform:translateX(0)}
+
+
+.btn-fill{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--caramel);color:var(--espresso);border:none;
+  font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  padding:14px 32px;transition:var(--trans);position:relative;overflow:hidden;
+}
+.btn-fill::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);transform:translateX(-100%);transition:transform .3s}
+.btn-fill:hover::after{transform:translateX(0)}
+.btn-fill:hover{box-shadow:0 0 36px rgba(181,114,42,.45);transform:translateY(-2px)}
+
+.btn-line{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;border:1px solid rgba(245,237,224,.22);color:var(--cream);
+  font-family:var(--sans);font-size:11px;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  padding:13px 32px;transition:var(--trans);
+}
+.btn-line:hover{border-color:var(--caramel);color:var(--latte);background:rgba(181,114,42,.07);transform:translateY(-2px)}
+
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;border:none;color:var(--caramel);
+  font-family:var(--sans);font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  padding:8px 0;border-bottom:1px solid rgba(181,114,42,.35);transition:var(--trans);
+}
+.btn-ghost:hover{border-bottom-color:var(--caramel);gap:14px}
+
+
+.glass{
+  background:var(--smoke);border:1px solid var(--line);
+  backdrop-filter:blur(14px);transition:var(--trans);
+}
+.glass:hover{border-color:var(--lineGold);background:rgba(245,237,224,.08)}
+
+
+#toast{
+  position:fixed;bottom:90px;left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:var(--caramel);color:var(--espresso);
+  font-family:var(--sans);font-size:11px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  padding:13px 28px;z-index:9000;
+  opacity:0;transition:all .35s;pointer-events:none;
+  white-space:nowrap;box-shadow:0 6px 24px rgba(181,114,42,.4);
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+#lb{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(26,15,5,.97);backdrop-filter:blur(24px);
+  display:flex;align-items:center;justify-content:center;
+  padding:40px;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;
+}
+#lb.open{opacity:1;visibility:visible}
+#lb-wrap{position:relative;max-width:980px;width:100%}
+#lb-img{width:100%;max-height:82vh;object-fit:contain;transform:scale(.9);transition:transform .45s cubic-bezier(.34,1.56,.64,1);box-shadow:0 40px 120px rgba(0,0,0,.8)}
+#lb.open #lb-img{transform:scale(1)}
+#lb-x{position:absolute;top:-16px;right:-16px;width:42px;height:42px;background:var(--caramel);color:var(--espresso);border:none;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:var(--trans)}
+#lb-x:hover{background:var(--latte);transform:rotate(90deg)}
+.lb-arr{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;background:var(--smoke);border:1px solid var(--line);color:var(--cream);font-size:20px;display:flex;align-items:center;justify-content:center;transition:var(--trans);z-index:5}
+.lb-arr:hover{background:var(--caramel);color:var(--espresso);border-color:var(--caramel)}
+#lb-prev{left:-68px}#lb-next{right:-68px}
+#lb-cap{position:absolute;bottom:-44px;left:0;right:0;text-align:center;font-family:var(--bask);font-size:14px;font-style:italic;color:rgba(245,237,224,.55)}
+#lb-ctr{position:absolute;top:-44px;right:0;font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:rgba(245,237,224,.3);text-transform:uppercase}
+
+/* FAB */
+#fab{position:fixed;bottom:30px;right:30px;z-index:400;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.fab-wa{width:52px;height:52px;border-radius:50%;background:#25d366;color:#fff;border:none;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 22px rgba(37,211,102,.35);transition:var(--trans)}
+.fab-wa:hover{transform:scale(1.1) translateY(-2px);box-shadow:0 8px 32px rgba(37,211,102,.55)}
+.fab-book{background:var(--caramel);color:var(--espresso);border:none;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;text-align:center;line-height:1.4;transition:var(--trans);box-shadow:0 4px 22px rgba(181,114,42,.3)}
+.fab-book:hover{background:var(--latte);transform:translateY(-2px)}
+
+/* MODAL */
+.modal{
+  position:fixed;inset:0;z-index:1500;
+  background:rgba(26,15,5,.95);backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+}
+.modal.open{opacity:1;visibility:visible}
+.modal-box{
+  background:var(--coffee);border:1px solid var(--line);
+  width:100%;max-width:540px;max-height:90vh;overflow-y:auto;
+  transform:scale(.95) translateY(14px);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  scrollbar-width:thin;scrollbar-color:var(--roast) transparent;
+}
+.modal.open .modal-box{transform:scale(1) translateY(0)}
+.modal-hd{padding:26px 30px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.modal-ttl{font-family:var(--serif);font-size:24px;font-style:italic}
+.modal-x{background:none;border:none;color:rgba(245,237,224,.4);font-size:18px;transition:var(--trans);line-height:1}
+.modal-x:hover{color:var(--caramel);transform:rotate(90deg)}
+.modal-bd{padding:26px 30px 30px}
+
+/* FORM */
+.fg{margin-bottom:18px}
+.fl{display:block;font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:.38em;text-transform:uppercase;color:rgba(245,237,224,.35);margin-bottom:7px}
+.fi{width:100%;background:rgba(245,237,224,.04);border:1px solid var(--line);color:var(--cream);padding:12px 15px;font-family:var(--bask);font-size:15px;transition:var(--trans)}
+.fi:focus{border-color:var(--caramel);background:rgba(181,114,42,.05)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fs{width:100%;background:var(--caramel);color:var(--espresso);border:none;padding:15px;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;margin-top:6px;transition:var(--trans)}
+.fs:hover{background:var(--latte);box-shadow:0 0 36px rgba(181,114,42,.4)}
+
+
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:120px 40px 80px;position:relative;overflow:hidden;
+}
+.hero-steam{
+  display:flex;justify-content:center;gap:10px;margin-bottom:32px;
+  opacity:0;animation:hUp .6s 2.1s forwards;
+}
+.hs-line{
+  width:2px;border-radius:4px;
+  background:linear-gradient(var(--caramel),transparent);
+  animation:steamUp 2.4s ease-in-out infinite;
+}
+.hs-line:nth-child(1){height:28px;animation-delay:0s}
+.hs-line:nth-child(2){height:42px;animation-delay:.35s}
+.hs-line:nth-child(3){height:24px;animation-delay:.7s}
+.hs-line:nth-child(4){height:38px;animation-delay:1.05s}
+.hs-line:nth-child(5){height:20px;animation-delay:1.4s}
+@keyframes steamUp{
+  0%,100%{transform:translateY(0) scaleX(1);opacity:.8}
+  50%{transform:translateY(-12px) scaleX(1.4);opacity:.15}
+}
+.hero-eye{
+  font-family:var(--sans);font-size:10px;font-weight:600;
+  letter-spacing:.55em;text-transform:uppercase;color:var(--caramel);
+  margin-bottom:22px;opacity:0;animation:hUp .7s 2.2s forwards;
+}
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(64px,14vw,180px);
+  font-weight:900;font-style:italic;
+  line-height:.88;letter-spacing:-.025em;
+  margin-bottom:28px;
+  opacity:0;animation:hUp .9s 2.35s forwards;
+}
+.ht-hi{
+  color:var(--latte);
+  text-shadow:0 0 80px rgba(212,165,116,.5),0 0 160px rgba(212,165,116,.2);
+}
+.hero-dash{
+  display:block;height:2px;width:72px;
+  background:linear-gradient(90deg,transparent,var(--caramel),transparent);
+  margin:0 auto 24px;
+  opacity:0;animation:hUp .5s 2.5s forwards;
+}
+.hero-sub{
+  font-family:var(--bask);font-size:clamp(16px,2vw,22px);
+  font-style:italic;color:rgba(245,237,224,.65);
+  margin-bottom:12px;
+  opacity:0;animation:hUp .7s 2.6s forwards;
+}
+.hero-loc{
+  font-family:var(--sans);font-size:10px;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(245,237,224,.35);margin-bottom:50px;
+  opacity:0;animation:hUp .7s 2.7s forwards;
+}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;opacity:0;animation:hUp .7s 2.85s forwards}
+.hero-scroll{
+  position:absolute;bottom:38px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:hUp .6s 3.1s forwards;
+}
+.hero-scroll span{font-family:var(--sans);font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:rgba(245,237,224,.3)}
+.hsl{width:1px;height:48px;background:linear-gradient(var(--caramel),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes hUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1);transform-origin:top}50%{opacity:.25;transform:scaleY(.4);transform-origin:top}}
+
+/* ============================================================
+   VIDEO BANNER
+   ============================================================ */
+.video-banner{
+  position:relative;height:70vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.video-banner video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;filter:brightness(.35) saturate(1.2);
+}
+.vb-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,var(--espresso) 0%,transparent 25%,transparent 75%,var(--espresso) 100%);
+}
+.vb-content{
+  position:relative;z-index:2;text-align:center;padding:40px;
+}
+.vb-content .sec-title{font-size:clamp(36px,5vw,72px)}
+.vb-content .sec-body{margin:20px auto 36px;text-align:center}
+
+/* ============================================================
+   PHOTO MOSAIC
+   ============================================================ */
+.mosaic{
+  display:grid;
+  grid-template-columns:1.8fr 1fr 1fr;
+  grid-template-rows:360px 260px;
+  gap:3px;
+}
+.mc{position:relative;overflow:hidden;cursor:zoom-in}
+.mc.sr{grid-row:span 2}
+.mc.sc{grid-column:span 2}
+.mc img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.25,.46,.45,.94)}
+.mc:hover img{transform:scale(1.07)}
+.mc-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 30%,rgba(26,15,5,.88) 100%);
+  opacity:0;transition:opacity .4s;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:22px;
+}
+.mc:hover .mc-ov{opacity:1}
+.mc-name{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--latte)}
+.mc-sub{font-family:var(--sans);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(245,237,224,.5);margin-top:4px}
+.mc-zoom{
+  position:absolute;top:12px;right:12px;
+  background:rgba(26,15,5,.78);border:1px solid var(--lineGold);
+  color:var(--caramel);font-family:var(--sans);font-size:8px;
+  letter-spacing:.18em;padding:4px 10px;text-transform:uppercase;
+  opacity:0;transition:opacity .3s;backdrop-filter:blur(8px);
+}
+.mc:hover .mc-zoom{opacity:1}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats-strip{
+  background:var(--coffee);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.st{
+  padding:46px 28px;text-align:center;
+  border-right:1px solid var(--line);transition:var(--trans);
+}
+.st:last-child{border-right:none}
+.st:hover{background:rgba(181,114,42,.04)}
+.st-num{
+  font-family:var(--serif);font-size:clamp(38px,4vw,60px);
+  font-weight:700;color:var(--caramel);line-height:1;margin-bottom:8px;
+}
+.st-lbl{font-family:var(--sans);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,237,224,.3)}
+
+/* ============================================================
+   ABOUT STRIP
+   ============================================================ */
+.about-strip{padding:110px 0;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img-side{position:relative;height:560px;overflow:hidden}
+.about-img-side img{width:100%;height:100%;object-fit:cover;transition:transform .65s ease}
+.about-img-side:hover img{transform:scale(1.04)}
+.about-frame{position:absolute;inset:16px;border:1px solid rgba(181,114,42,.22);pointer-events:none}
+.about-badge{
+  position:absolute;bottom:0;right:30px;
+  background:var(--caramel);color:var(--espresso);
+  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  padding:11px 20px;
+}
+.about-text .sec-body{margin:18px 0 32px}
+.feat-row{display:flex;align-items:flex-start;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
+.feat-row:first-child{border-top:1px solid var(--line)}
+.feat-icon{width:42px;height:42px;flex-shrink:0;background:rgba(245,237,224,.04);border:1px solid var(--lineGold);display:flex;align-items:center;justify-content:center;font-size:18px}
+.feat-ttl{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+.feat-desc{font-family:var(--bask);font-size:14px;font-style:italic;color:rgba(245,237,224,.6);line-height:1.55}
+
+/* ============================================================
+   BREWING ANIMATION SECTION
+   ============================================================ */
+.brew-section{
+  background:var(--coffee);padding:100px 0;
+  overflow:hidden;position:relative;
+}
+.brew-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(181,114,42,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.brew-anim-canvas{
+  display:block;margin:48px auto 0;
+  width:min(600px,90vw);height:300px;
+}
+.brew-text{text-align:center;margin-bottom:0}
+.brew-text .sec-label{justify-content:center}
+.brew-text .sec-title{text-align:center}
+.brew-text .sec-body{margin:18px auto 0;text-align:center}
+.brew-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--line);
+  margin-top:56px;
+}
+.brew-step{background:var(--coffee);padding:36px 28px;text-align:center;transition:var(--trans)}
+.brew-step:hover{background:rgba(181,114,42,.05)}
+.bs-num{
+  font-family:var(--serif);font-size:42px;font-weight:700;
+  color:rgba(181,114,42,.25);line-height:1;margin-bottom:12px;
+}
+.bs-title{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+.bs-desc{font-family:var(--bask);font-size:14px;font-style:italic;color:rgba(245,237,224,.5);line-height:1.55}
+
+/* ============================================================
+   MENU TEASER
+   ============================================================ */
+.menu-teaser{padding:100px 0}
+.mt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);margin-top:50px}
+.mt-card{background:var(--espresso);overflow:hidden;transition:var(--trans);cursor:pointer}
+.mt-card:hover{transform:translateY(-5px);box-shadow:0 22px 56px rgba(0,0,0,.55);z-index:2}
+.mt-img{height:230px;overflow:hidden;position:relative}
+.mt-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.mt-card:hover .mt-img img{transform:scale(1.1)}
+.mt-body{padding:22px}
+.mt-name{font-family:var(--serif);font-size:19px;font-weight:500;margin-bottom:5px}
+.mt-desc{font-family:var(--bask);font-size:13px;font-style:italic;color:rgba(245,237,224,.55);line-height:1.5;margin-bottom:14px}
+.mt-price{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--caramel)}
+
+/* ============================================================
+   ORIGIN STORY (with scrolling parallax-like animation)
+   ============================================================ */
+.origin{padding:100px 0;position:relative;overflow:hidden}
+.origin-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.origin-visual{position:relative}
+.origin-img-main{width:100%;height:480px;overflow:hidden}
+.origin-img-main img{width:100%;height:100%;object-fit:cover;transition:transform .65s ease}
+.origin-img-main:hover img{transform:scale(1.05)}
+.origin-tag{
+  position:absolute;bottom:-1px;left:28px;
+  background:var(--green);color:rgba(245,237,224,.9);
+  font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  padding:10px 20px;
+}
+.origin-float{
+  position:absolute;top:-20px;right:-20px;
+  width:160px;height:160px;overflow:hidden;
+  border:3px solid var(--espresso);
+}
+.origin-float img{width:100%;height:100%;object-fit:cover}
+.origin-text p{
+  font-family:var(--bask);font-size:17px;
+  font-weight:400;color:rgba(245,237,224,.68);
+  line-height:1.85;margin-bottom:20px;
+}
+.origin-text p strong{color:var(--cream);font-weight:700}
+
+/* ============================================================
+   INSTAGRAM / SOCIAL STRIP
+   ============================================================ */
+.ig-strip{background:var(--coffee);padding:80px 0}
+.ig-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  gap:3px;margin-top:44px;
+}
+.ig-cell{
+  aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;
+}
+.ig-cell img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.ig-cell:hover img{transform:scale(1.1)}
+.ig-ov{
+  position:absolute;inset:0;
+  background:rgba(26,15,5,.65);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .35s;
+  font-size:22px;
+}
+.ig-cell:hover .ig-ov{opacity:1}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer{background:var(--coffee);border-top:1px solid var(--line);padding:80px 60px 42px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:60px;margin-bottom:52px}
+.footer-logo{font-family:var(--serif);font-size:48px;font-weight:700;font-style:italic;color:var(--latte);margin-bottom:14px;text-shadow:0 0 40px rgba(212,165,116,.3)}
+.footer-tag{font-family:var(--bask);font-size:15px;font-style:italic;color:rgba(245,237,224,.55);line-height:1.7;margin-bottom:22px}
+.footer-addr{font-family:var(--sans);font-size:13px;color:rgba(245,237,224,.3);line-height:2}
+.fcol-title{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.42em;text-transform:uppercase;color:var(--caramel);margin-bottom:22px}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:11px}
+.footer-links a,.footer-links button{font-family:var(--bask);font-size:14px;color:rgba(245,237,224,.35);background:none;border:none;padding:0;transition:color .3s;font-style:italic}
+.footer-links a:hover,.footer-links button:hover{color:var(--latte)}
+.fcr{display:flex;gap:11px;align-items:flex-start;margin-bottom:13px;font-family:var(--sans);font-size:13px;color:rgba(245,237,224,.35);line-height:1.6}
+.fcr a{color:rgba(245,237,224,.5);transition:color .3s}
+.fcr a:hover{color:var(--caramel)}
+.footer-div{border:none;border-top:1px solid var(--line);margin:0 0 28px}
+.footer-btm{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-copy{font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,237,224,.22)}
+.footer-sicons{display:flex;gap:8px}
+.footer-si{width:34px;height:34px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;transition:var(--trans);text-decoration:none}
+.footer-si:hover{border-color:var(--caramel);background:rgba(181,114,42,.08)}
+
+/* ============================================================
+   MENU PAGE
+   ============================================================ */
+.menu-hero{
+  height:48vh;position:relative;display:flex;align-items:flex-end;padding-bottom:60px;overflow:hidden;
+}
+.menu-hero-bg{position:absolute;inset:0}
+.menu-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.28) saturate(1.3)}
+.menu-hero-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(transparent,var(--espresso))}
+.menu-hero-text{position:relative;z-index:1}
+.menu-tabs{
+  display:flex;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none;
+  position:sticky;top:0;z-index:10;background:var(--espresso);padding:0 60px;
+}
+.menu-tabs::-webkit-scrollbar{display:none}
+.mtab{
+  background:none;border:none;border-bottom:2px solid transparent;
+  color:rgba(245,237,224,.35);padding:17px 22px;
+  font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  white-space:nowrap;transition:var(--trans);margin-bottom:-1px;flex-shrink:0;
+}
+.mtab.active{color:var(--latte);border-bottom-color:var(--caramel)}
+.mtab:hover:not(.active){color:rgba(245,237,224,.7)}
+.menu-filters{display:flex;gap:7px;flex-wrap:wrap;padding:26px 60px 0}
+.fpill{
+  background:none;border:1px solid var(--line);color:rgba(245,237,224,.35);
+  font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  padding:6px 14px;transition:var(--trans);
+}
+.fpill.active,.fpill:hover{border-color:var(--caramel);color:var(--caramel);background:rgba(181,114,42,.07)}
+.menu-sec-head{padding:48px 60px 28px;display:flex;align-items:flex-end;justify-content:space-between}
+.msh-title{font-family:var(--serif);font-size:clamp(28px,3.5vw,52px);font-weight:400;font-style:italic}
+.msh-note{font-family:var(--bask);font-size:13px;font-style:italic;color:rgba(245,237,224,.3)}
+.menu-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:2px;background:var(--line);
+  padding:0 60px 60px;background:transparent;
+}
+.menu-grid-inner{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:2px;background:var(--line);
+}
+.m-card{background:var(--coffee);overflow:hidden;transition:var(--trans);position:relative}
+.m-card:hover{transform:translateY(-4px);box-shadow:0 22px 58px rgba(0,0,0,.55);z-index:2}
+.m-img{height:210px;overflow:hidden;position:relative;cursor:zoom-in}
+.m-img img{width:100%;height:100%;object-fit:cover;transition:transform .65s ease}
+.m-card:hover .m-img img{transform:scale(1.1)}
+.m-zoom{
+  position:absolute;top:10px;right:10px;
+  background:rgba(26,15,5,.82);border:1px solid var(--lineGold);
+  color:var(--caramel);font-family:var(--sans);font-size:8px;letter-spacing:.16em;padding:4px 10px;
+  text-transform:uppercase;opacity:0;transition:opacity .3s;backdrop-filter:blur(8px);
+}
+.m-card:hover .m-zoom{opacity:1}
+.m-badges{position:absolute;bottom:10px;left:10px;display:flex;gap:4px}
+.m-body{padding:20px 22px 18px}
+.m-name{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:5px;line-height:1.2}
+.m-desc{font-family:var(--bask);font-size:13px;font-style:italic;color:rgba(245,237,224,.6);line-height:1.55;margin-bottom:16px}
+.m-ings{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.m-ing{font-family:var(--sans);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,237,224,.35);background:var(--smoke);border:1px solid var(--line);padding:3px 8px}
+.m-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line)}
+.m-price{font-family:var(--serif);font-size:24px;font-weight:300;color:var(--caramel)}
+.m-cal{font-family:var(--sans);font-size:8px;letter-spacing:.2em;color:rgba(245,237,224,.28);text-transform:uppercase}
+.m-order{
+  display:block;width:100%;margin-top:12px;
+  background:transparent;border:1px solid var(--line);color:rgba(245,237,224,.35);
+  font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  padding:10px;transition:var(--trans);text-align:center;
+}
+.m-order:hover{border-color:var(--caramel);color:var(--caramel);background:rgba(181,114,42,.06)}
+.badge{font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1px solid}
+.badge-veg{border-color:#4caf50;color:#4caf50;background:rgba(76,175,80,.1)}
+.badge-sig{border-color:var(--caramel);color:var(--caramel);background:rgba(181,114,42,.1)}
+.badge-hot{border-color:#c0392b;color:#c0392b;background:rgba(192,57,43,.1)}
+.badge-cold{border-color:#3498db;color:#3498db;background:rgba(52,152,219,.1)}
+.badge-new{border-color:#9b59b6;color:#9b59b6;background:rgba(155,89,182,.1)}
+
+/* ============================================================
+   EVENTS PAGE
+   ============================================================ */
+.ev-hero{height:50vh;position:relative;display:flex;align-items:flex-end;padding-bottom:60px;overflow:hidden}
+.ev-hero-bg{position:absolute;inset:0}
+.ev-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.22) saturate(1.2)}
+.ev-hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.22) saturate(1.2)}
+.ev-hero-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(transparent,var(--espresso))}
+.ev-ftabs{display:flex;gap:4px;padding:38px 60px 18px;flex-wrap:wrap}
+.evtab{background:none;border:1px solid var(--line);color:rgba(245,237,224,.35);font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:9px 22px;transition:var(--trans)}
+.evtab.active,.evtab:hover{background:var(--caramel);color:var(--espresso);border-color:var(--caramel)}
+.ev-upcoming{padding:0 60px 72px}
+.ev-card{
+  display:grid;grid-template-columns:380px 1fr;gap:0;
+  background:var(--coffee);border:1px solid var(--line);margin-bottom:22px;
+  overflow:hidden;transition:var(--trans);
+}
+.ev-card:hover{border-color:var(--lineGold);box-shadow:0 14px 50px rgba(0,0,0,.45)}
+.ev-img{position:relative;overflow:hidden;min-height:280px;cursor:zoom-in}
+.ev-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.ev-card:hover .ev-img img{transform:scale(1.05)}
+.ev-date-badge{
+  position:absolute;top:18px;left:18px;
+  background:var(--caramel);color:var(--espresso);
+  text-align:center;padding:9px 13px;min-width:58px;
+}
+.evdb-day{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1}
+.evdb-mon{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.ev-live{
+  position:absolute;top:18px;right:18px;
+  background:var(--red);color:#fff;
+  font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  padding:4px 11px;animation:liveblink 1.8s ease-in-out infinite;
+}
+@keyframes liveblink{0%,100%{opacity:1}50%{opacity:.4}}
+.ev-body{padding:32px 38px;display:flex;flex-direction:column;justify-content:center}
+.ev-cat{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:var(--caramel);margin-bottom:10px}
+.ev-title{font-family:var(--serif);font-size:clamp(24px,2.6vw,36px);font-weight:400;line-height:1.1;margin-bottom:12px}
+.ev-desc{font-family:var(--bask);font-size:15px;font-style:italic;color:rgba(245,237,224,.65);line-height:1.65;margin-bottom:18px}
+.ev-meta{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:26px}
+.ev-mi{display:flex;align-items:center;gap:7px;font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,237,224,.55)}
+.ev-cd{display:flex;gap:14px;margin-bottom:26px}
+.cd-unit{text-align:center}
+.cd-num{font-family:var(--serif);font-size:34px;font-weight:300;color:var(--caramel);line-height:1}
+.cd-lbl{font-family:var(--sans);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,237,224,.3)}
+.cd-sep{font-family:var(--serif);font-size:26px;color:rgba(245,237,224,.25);align-self:flex-start;padding-top:4px}
+.ev-acts{display:flex;gap:10px;flex-wrap:wrap}
+.past-section{padding:0 60px 72px}
+.past-heading{margin-bottom:36px;display:flex;align-items:flex-end;justify-content:space-between}
+.past-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--line)}
+.past-card{background:var(--coffee);overflow:hidden;cursor:pointer;position:relative;transition:var(--trans)}
+.past-card.feat{grid-column:span 2;grid-row:span 2}
+.past-card:hover{z-index:2}
+.past-iw{position:relative;overflow:hidden;height:250px}
+.past-card.feat .past-iw{height:100%;min-height:380px}
+.past-iw img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.past-card:hover .past-iw img{transform:scale(1.07)}
+.past-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 35%,rgba(26,15,5,.92) 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:22px;
+  opacity:0;transition:opacity .4s;
+}
+.past-card:hover .past-ov{opacity:1}
+.past-ov-cat{font-family:var(--sans);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--caramel);margin-bottom:5px}
+.past-ov-title{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--cream);margin-bottom:4px}
+.past-ov-date{font-family:var(--sans);font-size:8px;letter-spacing:.2em;color:rgba(245,237,224,.35);text-transform:uppercase}
+
+/* ============================================================
+   ADMIN PANEL
+   ============================================================ */
+.admin-panel{
+  background:var(--roast);border:1px solid var(--line);
+  margin:0 60px 72px;padding:38px;
+}
+.admin-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.admin-title{font-family:var(--serif);font-size:24px;font-style:italic}
+.admin-badge{background:var(--caramel);color:var(--espresso);font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:4px 11px}
+.admin-fg{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.upload-z{
+  grid-column:1/-1;border:2px dashed var(--lineGold);padding:36px;text-align:center;
+  transition:var(--trans);cursor:pointer;position:relative;
+}
+.upload-z:hover,.upload-z.drag-on{border-color:var(--caramel);background:rgba(181,114,42,.04)}
+.upload-z input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:32px;margin-bottom:10px}
+.upload-txt{font-family:var(--bask);font-size:15px;font-style:italic;color:rgba(245,237,224,.6);margin-bottom:5px}
+.upload-sub{font-family:var(--sans);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,237,224,.3)}
+.upload-prev{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:7px;margin-top:14px}
+.prev-thumb{aspect-ratio:1;position:relative;overflow:hidden}
+.prev-thumb img{width:100%;height:100%;object-fit:cover}
+.prev-rm{position:absolute;top:4px;right:4px;width:20px;height:20px;background:rgba(26,15,5,.85);color:var(--cream);border:none;font-size:11px;display:flex;align-items:center;justify-content:center}
+.admin-ev-list{margin-top:36px}
+.admin-ev-row{
+  display:grid;grid-template-columns:75px 1fr auto auto;gap:18px;align-items:center;
+  padding:14px;border-bottom:1px solid var(--line);transition:var(--trans);
+}
+.admin-ev-row:hover{background:var(--smoke)}
+.admin-ev-thumb{width:75px;height:55px;overflow:hidden}
+.admin-ev-thumb img{width:100%;height:100%;object-fit:cover}
+.admin-ev-name{font-family:var(--serif);font-size:16px;font-weight:500}
+.admin-ev-date{font-family:var(--sans);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,237,224,.3);margin-top:3px}
+.admin-ev-status{font-family:var(--sans);font-size:8px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:3px 9px;border:1px solid}
+.s-upcoming{border-color:var(--caramel);color:var(--caramel)}
+.s-past{border-color:rgba(245,237,224,.3);color:rgba(245,237,224,.3)}
+.s-live{border-color:var(--red);color:var(--red);animation:liveblink 1.8s infinite}
+.admin-btns{display:flex;gap:7px}
+.abtn{background:none;border:1px solid var(--line);color:rgba(245,237,224,.35);padding:5px 12px;font-family:var(--sans);font-size:8px;letter-spacing:.14em;text-transform:uppercase;transition:var(--trans)}
+.abtn:hover{border-color:var(--caramel);color:var(--caramel)}
+.abtn.danger:hover{border-color:var(--red);color:var(--red)}
+
+/* ============================================================
+   ABOUT PAGE
+   ============================================================ */
+.ab-hero{height:54vh;position:relative;display:flex;align-items:flex-end;padding-bottom:60px;overflow:hidden}
+.ab-hero-bg{position:absolute;inset:0}
+.ab-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.28)}
+.ab-hero-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(transparent,var(--espresso))}
+.ab-story{padding:96px 0}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:76px;align-items:start}
+.ab-text p{font-family:var(--bask);font-size:16px;font-weight:400;color:rgba(245,237,224,.65);line-height:1.88;margin-bottom:20px}
+.ab-text p strong{color:var(--cream);font-weight:700}
+.ab-img-stack{position:relative}
+.ab-img-main{width:100%;height:470px;overflow:hidden;cursor:zoom-in}
+.ab-img-main img{width:100%;height:100%;object-fit:cover;transition:transform .65s ease}
+.ab-img-main:hover img{transform:scale(1.05)}
+.ab-img-float{position:absolute;bottom:-25px;left:-25px;width:190px;height:190px;overflow:hidden;border:4px solid var(--espresso)}
+.ab-img-float img{width:100%;height:100%;object-fit:cover}
+.vals{padding:72px 0;background:var(--coffee)}
+.vals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin-top:52px}
+.val-card{background:var(--coffee);padding:40px 32px;transition:var(--trans)}
+.val-card:hover{background:rgba(181,114,42,.04)}
+.val-icon{font-size:32px;margin-bottom:18px}
+.val-title{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.val-desc{font-family:var(--bask);font-size:14px;font-style:italic;color:rgba(245,237,224,.5);line-height:1.65}
+.gallery-wrap{padding:72px 0}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,210px);gap:3px;margin-top:44px}
+.gal-cell{overflow:hidden;cursor:zoom-in;position:relative}
+.gal-cell.wide{grid-column:span 2}
+.gal-cell img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.gal-cell:hover img{transform:scale(1.08)}
+.gal-ov{position:absolute;inset:0;background:rgba(26,15,5,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .35s;font-size:26px}
+.gal-cell:hover .gal-ov{opacity:1}
+
+/* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+.ct-hero{height:44vh;position:relative;display:flex;align-items:flex-end;padding-bottom:60px;overflow:hidden}
+.ct-hero-bg{position:absolute;inset:0}
+.ct-hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.24) saturate(1.1)}
+.ct-hero-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(transparent,var(--espresso))}
+.ct-main{padding:72px 0}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.ct-block{padding:24px;border:1px solid var(--line);margin-bottom:14px;position:relative;overflow:hidden;transition:var(--trans)}
+.ct-block:hover{border-color:var(--lineGold)}
+.ct-block::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(var(--caramel),transparent)}
+.ctb-lbl{font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:var(--caramel);margin-bottom:10px}
+.ctb-val{font-family:var(--bask);font-size:15px;color:rgba(245,237,224,.65);line-height:1.85;font-style:italic}
+.ctb-val a{color:rgba(245,237,224,.8);transition:color .3s}
+.ctb-val a:hover{color:var(--caramel)}
+.hours-tbl{width:100%;border-collapse:collapse}
+.hours-tbl tr{border-bottom:1px solid var(--line)}
+.hours-tbl tr:last-child{border-bottom:none}
+.hours-tbl td{font-family:var(--bask);font-size:14px;font-style:italic;padding:9px 0;color:rgba(245,237,224,.6)}
+.hours-tbl td:first-child{font-style:normal;color:rgba(245,237,224,.85);font-weight:700}
+.hours-tbl td:last-child{text-align:right}
+.wa-btn{
+  display:flex;align-items:center;gap:13px;
+  background:#25d366;color:#fff;
+  padding:16px 22px;font-family:var(--sans);font-size:11px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;transition:var(--trans);
+  margin-top:7px;position:relative;overflow:hidden;
+}
+.wa-btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.12);transform:translateX(-100%);transition:transform .3s}
+.wa-btn:hover::before{transform:translateX(0)}
+.wa-btn:hover{box-shadow:0 0 32px rgba(37,211,102,.4)}
+.social-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);margin:72px 0}
+.soc-card{background:var(--coffee);padding:32px 20px;text-align:center;transition:var(--trans);text-decoration:none;color:var(--cream);display:block}
+.soc-card:hover{background:rgba(255,255,255,.02)}
+.soc-icon{font-size:32px;margin-bottom:12px}
+.soc-name{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+.soc-handle{font-family:var(--sans);font-size:10px;letter-spacing:.1em;color:rgba(245,237,224,.3);margin-bottom:16px}
+.soc-follow{display:inline-block;border:1px solid;padding:6px 16px;font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;transition:var(--trans)}
+.soc-fb .soc-follow{border-color:#1877f2;color:#1877f2}
+.soc-fb:hover .soc-follow{background:#1877f2;color:#fff}
+.soc-ig .soc-follow{border-color:#e1306c;color:#e1306c}
+.soc-ig:hover .soc-follow{background:#e1306c;color:#fff}
+.soc-tk .soc-follow{border-color:#ff0050;color:#ff0050}
+.soc-tk:hover .soc-follow{background:#ff0050;color:#fff}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1100px){
+  .mosaic{grid-template-columns:1fr 1fr;grid-template-rows:300px 240px}
+  .mc.sr{grid-row:span 1}.mc.sc{grid-column:span 2}
+  .about-strip,.origin-inner,.ab-grid,.ct-grid{grid-template-columns:1fr;gap:48px}
+  .about-img-side,.ab-img-main,.origin-img-main{height:380px}
+  .ab-img-float{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .menu-teaser .mt-grid{grid-template-columns:1fr 1fr}
+  .vals-grid{grid-template-columns:1fr 1fr}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,180px)}
+  .brew-steps{grid-template-columns:1fr 1fr}
+  .ig-grid{grid-template-columns:repeat(3,1fr)}
+  .ev-card{grid-template-columns:1fr}
+  .ev-img{min-height:240px;max-height:280px}
+  .past-grid{grid-template-columns:1fr 1fr}
+  .past-card.feat{grid-column:span 1;grid-row:span 1}
+  .admin-panel{margin:0 24px 60px}
+  .stats-strip{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  #nav{padding:16px 22px}
+  #nav.solid{padding:11px 22px}
+  .nav-links,.nav-order{display:none}
+  .nav-ham{display:flex}
+  .wrap{padding:0 22px}
+  .mosaic{grid-template-columns:1fr;grid-template-rows:250px}
+  .mc.sc{grid-column:span 1}
+  .stats-strip{grid-template-columns:1fr 1fr}
+  .menu-tabs,.menu-filters,.menu-grid,.ev-upcoming,.past-section{padding-left:22px;padding-right:22px}
+  .menu-sec-head{padding:36px 22px 22px;flex-direction:column;align-items:flex-start;gap:7px}
+  .menu-grid-inner{grid-template-columns:1fr}
+  .ev-ftabs{padding:22px 22px 14px}
+  .brew-steps{grid-template-columns:1fr}
+  .ig-grid{grid-template-columns:repeat(2,1fr)}
+  .vals-grid,.social-row{grid-template-columns:1fr}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,145px)}
+  .gal-cell.wide{grid-column:span 1}
+  #footer{padding:52px 22px 36px}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .admin-fg{grid-template-columns:1fr}
+  .admin-ev-row{grid-template-columns:60px 1fr}
+  .admin-ev-row .admin-ev-status,.admin-ev-row .admin-btns{display:none}
+  #lb-prev{left:8px}#lb-next{right:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="ld-steam">
+    <div class="ld-steam-line"></div><div class="ld-steam-line"></div><div class="ld-steam-line"></div>
+  </div>
+  <div class="ld-cup">☕</div>
+  <div class="ld-brand">Himalayan Java</div>
+  <div class="ld-sub">Itahari — Nepal's Finest Since 1999</div>
+  <div class="ld-track"><div class="ld-prog" id="ldbar"></div></div>
+</div>
+
+<!-- Canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- Cursor -->
+<div id="cur-ring"></div>
+<div id="cur-dot"></div>
+
+<!-- Page Wipe -->
+<div id="page-wipe">
+  <div class="wc"></div><div class="wc"></div><div class="wc"></div>
+  <div class="wc"></div><div class="wc"></div><div class="wc"></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo" onclick="go('home')">
+    <span class="nav-logo-icon">☕</span>
+    <span class="nav-logo-text">Himalayan <span>Java</span></span>
+  </div>
+  <div class="nav-links">
+    <button class="nl active" id="nb-home" onclick="go('home')">Home</button>
+    <button class="nl" id="nb-menu" onclick="go('menu')">Menu</button>
+    <button class="nl" id="nb-events" onclick="go('events')">Events</button>
+    <button class="nl" id="nb-about" onclick="go('about')">About</button>
+    <button class="nl" id="nb-contact" onclick="go('contact')">Contact</button>
+  </div>
+  <button class="nav-order" onclick="openModal()">Order / Reserve</button>
+  <button class="nav-ham" id="navham" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mob-menu">
+  <button class="mob-x" onclick="toggleMob()">✕</button>
+  <button class="mob-lnk" onclick="go('home');toggleMob()">Home</button>
+  <button class="mob-lnk" onclick="go('menu');toggleMob()">Menu</button>
+  <button class="mob-lnk" onclick="go('events');toggleMob()">Events</button>
+  <button class="mob-lnk" onclick="go('about');toggleMob()">About</button>
+  <button class="mob-lnk" onclick="go('contact');toggleMob()">Contact</button>
+  <button class="mob-lnk" style="color:var(--caramel)" onclick="openModal();toggleMob()">Order / Reserve</button>
+</div>
+
+<!-- =====================================================
+     PAGE WRAP
+     ===================================================== -->
+<div id="pw">
+
+<!-- ==================== HOME ==================== -->
+<div class="page active" id="page-home">
+
+  <section id="hero">
+    <div class="hero-steam">
+      <div class="hs-line"></div><div class="hs-line"></div><div class="hs-line"></div>
+      <div class="hs-line"></div><div class="hs-line"></div>
+    </div>
+    <div class="hero-eye">Nepal's First Specialty Coffee · Since 1999</div>
+    <h1 class="hero-title">
+      <span class="ht-hi">Himalayan</span><br>Java
+    </h1>
+    <span class="hero-dash"></span>
+    <p class="hero-sub">Where every cup tells the story of the mountains</p>
+    <div class="hero-loc">📍 Itahari, Sunsari &nbsp;·&nbsp; Open Daily 7AM – 10PM &nbsp;·&nbsp; Free WiFi</div>
+    <div class="hero-ctas">
+      <button class="btn-fill" onclick="go('menu')">☕ Explore Our Menu</button>
+      <button class="btn-line" onclick="go('contact')">Reserve a Table →</button>
+    </div>
+    <div class="hero-scroll">
+      <div class="hsl"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- MOSAIC -->
+  <div class="mosaic">
+    <div class="mc sr" onclick="openLB(0,mosaicImgs)">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85" alt="Himalayan Java Interior" loading="lazy">
+      <div class="mc-ov"><div class="mc-name">The Café</div><div class="mc-sub">Warm & Welcoming</div></div>
+      <div class="mc-zoom">View</div>
+    </div>
+    <div class="mc" onclick="openLB(1,mosaicImgs)">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=85" alt="Espresso" loading="lazy">
+      <div class="mc-ov"><div class="mc-name">Handcrafted Espresso</div></div>
+      <div class="mc-zoom">View</div>
+    </div>
+    <div class="mc" onclick="openLB(2,mosaicImgs)">
+      <img src="https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?w=600&q=85" alt="Latte Art" loading="lazy">
+      <div class="mc-ov"><div class="mc-name">Latte Art</div></div>
+      <div class="mc-zoom">View</div>
+    </div>
+    <div class="mc" onclick="openLB(3,mosaicImgs)">
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=85" alt="Bakery" loading="lazy">
+      <div class="mc-ov"><div class="mc-name">Fresh Bakery</div></div>
+      <div class="mc-zoom">View</div>
+    </div>
+    <div class="mc sc" onclick="openLB(4,mosaicImgs)">
+      <img src="https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=900&q=85" alt="Coffee Beans" loading="lazy">
+      <div class="mc-ov"><div class="mc-name">Nepali Arabica Beans</div><div class="mc-sub">From the Himalayan Foothills</div></div>
+      <div class="mc-zoom">View</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="st rev"><div class="st-num" data-count="25" data-suffix="+">0</div><div class="st-lbl">Years of Excellence</div></div>
+    <div class="st rev"><div class="st-num" data-count="40" data-suffix="+">0</div><div class="st-lbl">Outlets Nationwide</div></div>
+    <div class="st rev"><div class="st-num" data-count="100" data-suffix="%">0</div><div class="st-lbl">Nepali Arabica Coffee</div></div>
+    <div class="st rev"><div class="st-num" data-count="2000" data-suffix="+">0</div><div class="st-lbl">Baristas Trained</div></div>
+  </div>
+
+  <!-- ABOUT TEASER -->
+  <div class="wrap">
+    <div class="about-strip">
+      <div class="about-img-side rev-l">
+        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=85" alt="Himalayan Java Story" loading="lazy" onclick="openLB(5,mosaicImgs)" style="cursor:zoom-in">
+        <div class="about-frame"></div>
+        <div class="about-badge">Est. 1999, Nepal</div>
+      </div>
+      <div class="about-text rev-r">
+        <div class="sec-label">Our Heritage</div>
+        <h2 class="sec-title">Born in <em>Kathmandu</em>,<br>brewed for Itahari</h2>
+        <p class="sec-body" style="margin:18px 0 30px">Founded in 1999 as Nepal's very first specialty coffee house, Himalayan Java has grown from a single café in Kathmandu into a national institution — and now, Itahari's most beloved brew destination.</p>
+        <div style="margin-top:8px">
+          <div class="feat-row">
+            <div class="feat-icon">🏔️</div>
+            <div><div class="feat-ttl">100% Nepali Arabica</div><div class="feat-desc">Beans sourced from high-altitude farms in Ilam, Nuwakot, and the Himalayan foothills — roasted fresh, delivered to every cup.</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon">🎓</div>
+            <div><div class="feat-ttl">Barista School</div><div class="feat-desc">Our certified barista training programme has trained over 2,000 students — world-class technique, Nepali pride.</div></div>
+          </div>
+          <div class="feat-row">
+            <div class="feat-icon">🌿</div>
+            <div><div class="feat-ttl">Farm to Cup</div><div class="feat-desc">We own coffee farms in Ilam. From harvest to your hands — freshness is never compromised.</div></div>
+          </div>
+        </div>
+        <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn-fill" onclick="go('about')">Our Full Story</button>
+          <button class="btn-ghost" onclick="go('menu')">Explore Menu →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO BANNER (Using animated canvas as fallback) -->
+  <div class="video-banner">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=1600&q=70">
+      <source src="https://www.pexels.com/download/video/5946523" type="video/mp4">
+    </video>
+    <div class="vb-overlay"></div>
+    <div class="vb-content">
+      <div class="sec-label" style="justify-content:center">The Art of Coffee</div>
+      <h2 class="sec-title rev" style="text-align:center;font-size:clamp(32px,4.5vw,68px)">Every pour is a <em>craft</em></h2>
+      <p class="sec-body rev" style="text-align:center;margin:18px auto 32px">Skilled baristas. Single-origin Nepali beans. Precision extraction. The result is a cup that carries the spirit of the Himalayas in every sip.</p>
+      <button class="btn-fill rev" onclick="go('menu')">Discover Our Brews</button>
+    </div>
+  </div>
+
+  <!-- BREWING PROCESS -->
+  <div class="brew-section">
+    <div class="wrap">
+      <div class="brew-text">
+        <div class="sec-label" style="justify-content:center">The Process</div>
+        <h2 class="sec-title rev" style="text-align:center;font-size:clamp(32px,4.5vw,68px)">From <em>farm</em> to cup</h2>
+        <p class="sec-body rev" style="text-align:center;margin:18px auto 0">Every bean has a journey. Ours begins in the misty highlands of Eastern Nepal and ends in your hands.</p>
+      </div>
+
+      <!-- Animated Brew Canvas -->
+      <canvas id="brewCanvas" class="brew-anim-canvas" width="600" height="300"></canvas>
+
+      <div class="brew-steps">
+        <div class="brew-step rev">
+          <div class="bs-num">01</div>
+          <div class="bs-title">Cultivation</div>
+          <div class="bs-desc">Arabica trees grown at altitude in organic Ilam estates — mist, shade, and patience.</div>
+        </div>
+        <div class="brew-step rev" style="transition-delay:.1s">
+          <div class="bs-num">02</div>
+          <div class="bs-title">Processing</div>
+          <div class="bs-desc">Wet-washed and sun-dried with the greatest care, preserving every complex note.</div>
+        </div>
+        <div class="brew-step rev" style="transition-delay:.2s">
+          <div class="bs-num">03</div>
+          <div class="bs-title">Roasting</div>
+          <div class="bs-desc">Master roasters craft each batch to unlock the chocolate, citrus, and floral profiles unique to Nepal.</div>
+        </div>
+        <div class="brew-step rev" style="transition-delay:.3s">
+          <div class="bs-num">04</div>
+          <div class="bs-title">Crafting</div>
+          <div class="bs-desc">Certified baristas extract each shot to our exacting standards — ground fresh, pulled with precision.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU TEASER -->
+  <div class="menu-teaser">
+    <div class="wrap">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:18px">
+        <div>
+          <div class="sec-label">Featured Favourites</div>
+          <h2 class="sec-title rev">Our <em>finest</em> brews</h2>
+        </div>
+        <button class="btn-line rev" onclick="go('menu')">Full Menu →</button>
+      </div>
+      <div class="mt-grid">
+        <div class="mt-card rev" onclick="go('menu')">
+          <div class="mt-img"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=85" alt="Espresso" loading="lazy"></div>
+          <div class="mt-body"><div class="mt-name">Nepali Espresso</div><div class="mt-desc">Double shot of 100% Arabica, silky crema</div><div class="mt-price">Rs. 180</div></div>
+        </div>
+        <div class="mt-card rev" style="transition-delay:.1s" onclick="go('menu')">
+          <div class="mt-img"><img src="https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=600&q=85" alt="Cappuccino" loading="lazy"></div>
+          <div class="mt-body"><div class="mt-name">Cappuccino</div><div class="mt-desc">Espresso, steamed milk, velvety foam</div><div class="mt-price">Rs. 280</div></div>
+        </div>
+        <div class="mt-card rev" style="transition-delay:.2s" onclick="go('menu')">
+          <div class="mt-img"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=85" alt="Croissant" loading="lazy"></div>
+          <div class="mt-body"><div class="mt-name">Butter Croissant</div><div class="mt-desc">Flaky, golden, freshly baked daily</div><div class="mt-price">Rs. 220</div></div>
+        </div>
+        <div class="mt-card rev" style="transition-delay:.3s" onclick="go('menu')">
+          <div class="mt-img"><img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&q=85" alt="Cold Brew" loading="lazy"></div>
+          <div class="mt-body"><div class="mt-name">Himalayan Cold Brew</div><div class="mt-desc">12-hour cold steep, smooth & bold</div><div class="mt-price">Rs. 360</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IG STRIP -->
+  <div class="ig-strip">
+    <div class="wrap">
+      <div style="text-align:center">
+        <div class="sec-label" style="justify-content:center">@himalayanjava</div>
+        <h2 class="sec-title rev" style="text-align:center;font-size:clamp(28px,3.5vw,56px)">Follow us on <em>Instagram</em></h2>
+      </div>
+      <div class="ig-grid" style="margin-top:38px">
+        <div class="ig-cell" onclick="openLB(0,igImgs)"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80" alt="" loading="lazy"><div class="ig-ov">📸</div></div>
+        <div class="ig-cell" onclick="openLB(1,igImgs)"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80" alt="" loading="lazy"><div class="ig-ov">📸</div></div>
+        <div class="ig-cell" onclick="openLB(2,igImgs)"><img src="https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?w=400&q=80" alt="" loading="lazy"><div class="ig-ov">📸</div></div>
+        <div class="ig-cell" onclick="openLB(3,igImgs)"><img src="https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=400&q=80" alt="" loading="lazy"><div class="ig-ov">📸</div></div>
+        <div class="ig-cell" onclick="openLB(4,igImgs)"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&q=80" alt="" loading="lazy"><div class="ig-ov">📸</div></div>
+        <div class="ig-cell" onclick="openLB(5,igImgs)"><img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400&q=80" alt="" loading="lazy"><div class="ig-ov">📸</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Himalayan Java</div>
+        <div class="footer-tag">Nepal's first specialty coffee house — bringing the flavour of the Himalayas to Itahari, one cup at a time.</div>
+        <div class="footer-addr">Itahari, Sunsari District<br>Koshi Province, Nepal</div>
+      </div>
+      <div>
+        <div class="fcol-title">Navigate</div>
+        <ul class="footer-links">
+          <li><button onclick="go('home')">Home</button></li>
+          <li><button onclick="go('menu')">Menu</button></li>
+          <li><button onclick="go('events')">Events</button></li>
+          <li><button onclick="go('about')">About Us</button></li>
+          <li><button onclick="go('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fcol-title">Menu</div>
+        <ul class="footer-links">
+          <li><a>Espresso Drinks</a></li>
+          <li><a>Cold Beverages</a></li>
+          <li><a>Bakery & Food</a></li>
+          <li><a>Tea Selection</a></li>
+          <li><a>Coffee Beans</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fcol-title">Contact</div>
+        <div class="fcr">📞 <span><a href="tel:+977">+977 (Itahari)</a><br><small style="opacity:.5;font-size:11px">WhatsApp Available</small></span></div>
+        <div class="fcr">📧 <span><a href="mailto:hello@himalayanjava.com">hello@himalayanjava.com</a></span></div>
+        <div class="fcr">🕔 <span>Daily: 7:00 AM – 10:00 PM</span></div>
+        <div class="fcr">📍 <span>Itahari, Sunsari, Nepal</span></div>
+      </div>
+    </div>
+    <hr class="footer-div">
+    <div class="footer-btm">
+      <div class="footer-copy">© 2025 Himalayan Java Coffee — Itahari Branch. All Rights Reserved.</div>
+      <div class="footer-sicons">
+        <a class="footer-si" href="#" title="Facebook">📘</a>
+        <a class="footer-si" href="#" title="Instagram">📸</a>
+        <a class="footer-si" href="#" title="TikTok">🎵</a>
+        <a class="footer-si" href="https://wa.me/977" title="WhatsApp">💬</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== MENU PAGE ==================== -->
+<div class="page" id="page-menu">
+  <div class="menu-hero">
+    <div class="menu-hero-bg">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=85" alt="Menu">
+    </div>
+    <div class="menu-hero-text wrap">
+      <div class="sec-label">What We Brew</div>
+      <h1 class="sec-title" style="font-size:clamp(40px,6vw,84px)">Crafted with<br><em>mountain soul</em></h1>
+    </div>
+  </div>
+
+  <div class="menu-tabs" id="menuTabs">
+    <button class="mtab active" data-tab="espresso">☕ Espresso</button>
+    <button class="mtab" data-tab="cold">🧊 Cold Beverages</button>
+    <button class="mtab" data-tab="brew">🫗 Brew Bar</button>
+    <button class="mtab" data-tab="tea">🍵 Tea & Others</button>
+    <button class="mtab" data-tab="food">🥐 Food</button>
+    <button class="mtab" data-tab="beans">🌱 Coffee Beans</button>
+  </div>
+
+  <div class="menu-filters" id="menuFilters">
+    <button class="fpill active" data-filter="all">All</button>
+    <button class="fpill" data-filter="veg">🌿 Veg</button>
+    <button class="fpill" data-filter="sig">⭐ Signature</button>
+    <button class="fpill" data-filter="hot">🔥 Hot</button>
+    <button class="fpill" data-filter="cold">❄️ Cold</button>
+    <button class="fpill" data-filter="new">🆕 New</button>
+  </div>
+
+  <div id="menuContent" style="padding-bottom:80px"></div>
+
+  <footer id="footer" style="margin-top:0">
+    <div class="footer-grid">
+      <div><div class="footer-logo">Himalayan Java</div><div class="footer-tag">Nepal's first specialty coffee. Pure Arabica. Pure passion.</div><div class="footer-addr">Itahari, Sunsari District, Nepal</div></div>
+      <div><div class="fcol-title">Navigate</div><ul class="footer-links"><li><button onclick="go('home')">Home</button></li><li><button onclick="go('menu')">Menu</button></li><li><button onclick="go('events')">Events</button></li><li><button onclick="go('contact')">Contact</button></li></ul></div>
+      <div><div class="fcol-title">Menu</div><ul class="footer-links"><li><a>Espresso Drinks</a></li><li><a>Cold Beverages</a></li><li><a>Brew Bar</a></li><li><a>Bakery & Food</a></li></ul></div>
+      <div><div class="fcol-title">Contact</div><div class="fcr">📞 <span>+977 (Itahari)</span></div><div class="fcr">🕔 <span>7AM – 10PM Daily</span></div></div>
+    </div>
+    <hr class="footer-div"><div class="footer-btm"><div class="footer-copy">© 2025 Himalayan Java Coffee — Itahari</div><div class="footer-sicons"><a class="footer-si" href="#">📘</a><a class="footer-si" href="#">📸</a><a class="footer-si" href="#">🎵</a></div></div>
+  </footer>
+</div>
+
+<!-- ==================== EVENTS PAGE ==================== -->
+<div class="page" id="page-events">
+  <div class="ev-hero">
+    <div class="ev-hero-bg">
+      <video autoplay muted loop playsinline>
+        <source src="https://www.pexels.com/download/video/7182830" type="video/mp4">
+      </video>
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=85" alt="Events" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.22)">
+    </div>
+    <div class="wrap" style="position:relative;z-index:1;width:100%">
+      <div class="sec-label">What's On</div>
+      <h1 class="sec-title" style="font-size:clamp(40px,6vw,84px)">Moments to <em>savour</em></h1>
+      <p style="font-family:var(--bask);font-size:17px;font-style:italic;color:rgba(245,237,224,.55);margin-top:14px;max-width:500px">Barista sessions, coffee cuppings, live music, and community gatherings — every week brings something new.</p>
+    </div>
+  </div>
+
+  <div class="ev-ftabs">
+    <button class="evtab active" data-evf="all">All Events</button>
+    <button class="evtab" data-evf="upcoming">Upcoming</button>
+    <button class="evtab" data-evf="past">Past</button>
+    <button class="evtab" data-evf="cupping">Cuppings</button>
+    <button class="evtab" data-evf="music">Live Music</button>
+    <button class="evtab" data-evf="workshop">Workshops</button>
+  </div>
+
+  <div class="ev-upcoming" id="upcomingCont">
+    <div style="padding-bottom:24px;padding-top:14px">
+      <div class="sec-label">Coming Up</div>
+      <h2 class="sec-title" style="font-size:clamp(26px,3.5vw,48px)">Upcoming <em>events</em></h2>
+    </div>
+    <div id="upcomingList"></div>
+  </div>
+
+  <div class="past-section" id="pastSection">
+    <div class="past-heading">
+      <div>
+        <div class="sec-label">The Archive</div>
+        <h2 class="sec-title" style="font-size:clamp(26px,3.5vw,48px)">Past <em>highlights</em></h2>
+      </div>
+      <p style="font-family:var(--bask);font-size:14px;font-style:italic;color:rgba(245,237,224,.3);max-width:260px;text-align:right">Every gathering, a memory made over great coffee.</p>
+    </div>
+    <div class="past-grid" id="pastList"></div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div class="admin-panel">
+    <div class="admin-hd">
+      <div class="admin-title">Event Management</div>
+      <span class="admin-badge">Admin Panel</span>
+    </div>
+    <form id="adminForm" onsubmit="submitEv(event)">
+      <div class="admin-fg">
+        <div class="fg"><label class="fl">Event Name *</label><input type="text" class="fi" id="evName" placeholder="e.g. Saturday Cupping Session" required></div>
+        <div class="fg"><label class="fl">Category</label><select class="fi" id="evCat"><option value="cupping">Coffee Cupping</option><option value="music">Live Music</option><option value="workshop">Barista Workshop</option><option value="tasting">Tasting</option><option value="community">Community</option><option value="special">Special Event</option></select></div>
+        <div class="fg"><label class="fl">Date *</label><input type="date" class="fi" id="evDate" required></div>
+        <div class="fg"><label class="fl">Time</label><input type="text" class="fi" id="evTime" placeholder="e.g. 10:00 AM – 1:00 PM"></div>
+        <div class="fg" style="grid-column:1/-1"><label class="fl">Description</label><textarea class="fi" id="evDesc" rows="3" placeholder="Tell guests what to expect..."></textarea></div>
+        <div class="fg"><label class="fl">Entry / Price</label><input type="text" class="fi" id="evPrice" placeholder="Free / Rs. 500"></div>
+        <div class="fg"><label class="fl">Status</label><select class="fi" id="evStatus"><option value="upcoming">Upcoming</option><option value="past">Past</option><option value="live">Live Now</option></select></div>
+        <div class="fg" style="grid-column:1/-1">
+          <label class="fl">Photos</label>
+          <div class="upload-z" id="uploadZ">
+            <input type="file" id="evImgs" accept="image/*" multiple onchange="prevImgs(event)">
+            <div class="upload-icon">📸</div>
+            <div class="upload-txt">Drop images here or click to upload</div>
+            <div class="upload-sub">JPG, PNG, WEBP · Multiple files</div>
+          </div>
+          <div class="upload-prev" id="imgPrev"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:6px">
+        <button type="submit" class="fs" style="max-width:220px">Add Event</button>
+        <button type="button" class="btn-line" onclick="clearEvForm()" style="padding:12px 24px">Clear</button>
+      </div>
+    </form>
+    <div id="adminEvList" style="margin-top:32px">
+      <div style="padding:13px 0 17px;border-bottom:1px solid var(--line);margin-bottom:3px"><span style="font-family:var(--sans);font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:rgba(245,237,224,.28)">Manage Events</span></div>
+      <div id="adminEvRows"></div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-grid">
+      <div><div class="footer-logo">Himalayan Java</div><div class="footer-tag">Nepal's first specialty coffee — community at heart.</div><div class="footer-addr">Itahari, Sunsari District, Nepal</div></div>
+      <div><div class="fcol-title">Navigate</div><ul class="footer-links"><li><button onclick="go('home')">Home</button></li><li><button onclick="go('menu')">Menu</button></li><li><button onclick="go('events')">Events</button></li><li><button onclick="go('contact')">Contact</button></li></ul></div>
+      <div><div class="fcol-title">Events</div><ul class="footer-links"><li><a>Coffee Cuppings</a></li><li><a>Barista Classes</a></li><li><a>Live Music</a></li><li><a>Private Bookings</a></li></ul></div>
+      <div><div class="fcol-title">Contact</div><div class="fcr">📞 <span>+977 (Itahari)</span></div><div class="fcr">🕔 <span>7AM – 10PM Daily</span></div></div>
+    </div>
+    <hr class="footer-div"><div class="footer-btm"><div class="footer-copy">© 2025 Himalayan Java Coffee</div><div class="footer-sicons"><a class="footer-si" href="#">📘</a><a class="footer-si" href="#">📸</a><a class="footer-si" href="#">🎵</a></div></div>
+  </footer>
+</div>
+
+<!-- ==================== ABOUT PAGE ==================== -->
+<div class="page" id="page-about">
+  <div class="ab-hero">
+    <div class="ab-hero-bg">
+      <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1600&q=85" alt="About">
+    </div>
+    <div class="wrap" style="position:relative;z-index:1;width:100%">
+      <div class="sec-label">Our Story</div>
+      <h1 class="sec-title" style="font-size:clamp(40px,6vw,84px)">Pioneering <em>coffee</em><br>in Nepal</h1>
+    </div>
+  </div>
+
+  <div class="ab-story">
+    <div class="wrap">
+      <div class="ab-grid">
+        <div class="ab-text rev-l">
+          <div class="sec-label">The Journey</div>
+          <h2 class="sec-title" style="font-size:clamp(28px,3.8vw,60px);margin-bottom:28px">The <em>Himalayan Java</em> story</h2>
+          <p><strong>In 1999, when coffee culture barely existed in Nepal,</strong> Gagan Pradhan and Anand Gurung opened a small café in Kathmandu with a bold vision: give Nepalis access to world-class coffee made from their own Himalayan beans.</p>
+          <p>Inspired by the independent coffee shop culture he encountered while studying hospitality management in Sydney, Australia, Pradhan saw what Nepal's Arabica beans could become. Nepal's unique altitude, climate, and organic soil conditions produce a coffee of extraordinary character — <strong>chocolatey, floral, with bright citrus notes</strong> that rival the world's finest.</p>
+          <p>Their first sale? A banana smoothie. The early days were challenging — Nepalis weren't yet ready for the "bitter" beverage. But slowly, methodically, Himalayan Java built a culture. Today, Kathmandu alone has over 4,000 cafés — a movement the brand helped ignite.</p>
+          <p>We are <strong>proud to bring that legacy to Itahari</strong> — Eastern Nepal's growing, ambitious city. Our Itahari branch carries the same commitment: 100% Nepali Arabica, expert baristas, warm hospitality, and a space where ideas, stories, and great coffee all live together.</p>
+          <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn-fill" onclick="openModal()">Visit Us Today</button>
+            <button class="btn-ghost" onclick="go('menu')">See Our Menu →</button>
+          </div>
+        </div>
+        <div class="ab-img-stack rev-r">
+          <div class="ab-img-main" onclick="openLB(0,aboutGal)">
+            <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&q=85" alt="Interior" loading="lazy">
+          </div>
+          <div class="ab-img-float">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=85" alt="Coffee" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORIGIN -->
+  <div class="origin" style="background:var(--coffee)">
+    <div class="wrap">
+      <div class="origin-inner">
+        <div class="origin-visual rev-l">
+          <div class="origin-img-main" onclick="openLB(2,aboutGal)">
+            <img src="https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=800&q=85" alt="Coffee Farm" loading="lazy">
+          </div>
+          <div class="origin-tag">🌱 Ilam Coffee Farm, Eastern Nepal</div>
+          <div class="origin-float">
+            <img src="https://images.unsplash.com/photo-1624970820327-2e5e0c1d3e34?w=300&q=85" alt="Beans" loading="lazy">
+          </div>
+        </div>
+        <div class="rev-r">
+          <div class="sec-label">Origin</div>
+          <h2 class="sec-title" style="font-size:clamp(28px,3.8vw,58px);margin-bottom:28px">From the <em>Himalayan</em> foothills</h2>
+          <p style="font-family:var(--bask);font-size:17px;color:rgba(245,237,224,.65);line-height:1.85;margin-bottom:18px">Nepal's coffee-growing regions — Ilam, Nuwakot, Sindhupalchok, and Palpa — sit between 1,000 and 2,000 metres above sea level, in the shadow of the world's tallest mountains.</p>
+          <p style="font-family:var(--bask);font-size:17px;color:rgba(245,237,224,.65);line-height:1.85;margin-bottom:18px">The cool misty air, rich volcanic soil, and careful organic farming practices produce Arabica beans of exceptional complexity. <strong style="color:var(--cream)">Himalayan Java operates its own farm in Ilam</strong> — giving us direct control from harvest to roast.</p>
+          <p style="font-family:var(--bask);font-size:17px;color:rgba(245,237,224,.65);line-height:1.85">Every cup you drink in our Itahari café was grown, processed, roasted, and crafted entirely in Nepal. <strong style="color:var(--cream)">That's a story worth tasting.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="vals">
+    <div class="wrap">
+      <div style="text-align:center">
+        <div class="sec-label" style="justify-content:center">What Drives Us</div>
+        <h2 class="sec-title rev" style="text-align:center;font-size:clamp(28px,3.8vw,60px)">Our <em>values</em></h2>
+      </div>
+      <div class="vals-grid">
+        <div class="val-card rev"><div class="val-icon">🏔️</div><div class="val-title">Nepali First</div><div class="val-desc">100% locally grown organic Arabica. We never compromise on the source — Nepal's mountains produce our only beans.</div></div>
+        <div class="val-card rev" style="transition-delay:.1s"><div class="val-icon">🎓</div><div class="val-title">Education</div><div class="val-desc">Our barista school has trained 2,000+ students. We believe in sharing knowledge and building a skilled coffee generation.</div></div>
+        <div class="val-card rev" style="transition-delay:.2s"><div class="val-icon">🌿</div><div class="val-title">Sustainability</div><div class="val-desc">Farm-to-cup traceability. Direct farmer relationships. Organic farming. The earth that grows our coffee deserves our care.</div></div>
+        <div class="val-card rev" style="transition-delay:.3s"><div class="val-icon">🤝</div><div class="val-title">Community</div><div class="val-desc">We create jobs, support local farmers, and build spaces where Nepalis connect. Coffee as a catalyst for community.</div></div>
+        <div class="val-card rev" style="transition-delay:.4s"><div class="val-icon">✨</div><div class="val-title">Craftsmanship</div><div class="val-desc">Every pour is intentional. We grind fresh, never re-steam milk, and extract to strict standards — because you deserve the best.</div></div>
+        <div class="val-card rev" style="transition-delay:.5s"><div class="val-icon">🚀</div><div class="val-title">Innovation</div><div class="val-desc">From Kathmandu to Toronto, from espresso bars to the first Mavam undercounter machine in Nepal — we lead, never follow.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-wrap">
+    <div class="wrap">
+      <div class="sec-label">The Experience</div>
+      <h2 class="sec-title rev">Life inside <em>Himalayan Java</em></h2>
+      <div class="gal-grid">
+        <div class="gal-cell wide" onclick="openLB(0,aboutGal)"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85" alt="" loading="lazy"><div class="gal-ov">🔍</div></div>
+        <div class="gal-cell" onclick="openLB(1,aboutGal)"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=85" alt="" loading="lazy"><div class="gal-ov">🔍</div></div>
+        <div class="gal-cell" onclick="openLB(2,aboutGal)"><img src="https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=500&q=85" alt="" loading="lazy"><div class="gal-ov">🔍</div></div>
+        <div class="gal-cell" onclick="openLB(3,aboutGal)"><img src="https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?w=500&q=85" alt="" loading="lazy"><div class="gal-ov">🔍</div></div>
+        <div class="gal-cell" onclick="openLB(4,aboutGal)"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=500&q=85" alt="" loading="lazy"><div class="gal-ov">🔍</div></div>
+        <div class="gal-cell wide" onclick="openLB(5,aboutGal)"><img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=900&q=85" alt="" loading="lazy"><div class="gal-ov">🔍</div></div>
+        <div class="gal-cell" onclick="openLB(6,aboutGal)"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&q=85" alt="" loading="lazy"><div class="gal-ov">🔍</div></div>
+        <div class="gal-cell" onclick="openLB(7,aboutGal)"><img src="https://images.unsplash.com/photo-1624970820327-2e5e0c1d3e34?w=500&q=85" alt="" loading="lazy"><div class="gal-ov">🔍</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-grid">
+      <div><div class="footer-logo">Himalayan Java</div><div class="footer-tag">Nepal's first specialty coffee house — since 1999.</div><div class="footer-addr">Itahari, Sunsari District, Nepal</div></div>
+      <div><div class="fcol-title">Navigate</div><ul class="footer-links"><li><button onclick="go('home')">Home</button></li><li><button onclick="go('menu')">Menu</button></li><li><button onclick="go('events')">Events</button></li><li><button onclick="go('contact')">Contact</button></li></ul></div>
+      <div><div class="fcol-title">Story</div><ul class="footer-links"><li><a>Our Heritage</a></li><li><a>Ilam Farm</a></li><li><a>Barista School</a></li><li><a>Press</a></li></ul></div>
+      <div><div class="fcol-title">Contact</div><div class="fcr">📞 <span>+977 (Itahari)</span></div><div class="fcr">🕔 <span>7AM – 10PM Daily</span></div></div>
+    </div>
+    <hr class="footer-div"><div class="footer-btm"><div class="footer-copy">© 2025 Himalayan Java Coffee</div><div class="footer-sicons"><a class="footer-si" href="#">📘</a><a class="footer-si" href="#">📸</a><a class="footer-si" href="#">🎵</a></div></div>
+  </footer>
+</div>
+
+<!-- ==================== CONTACT PAGE ==================== -->
+<div class="page" id="page-contact">
+  <div class="ct-hero">
+    <div class="ct-hero-bg">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=85" alt="Contact">
+    </div>
+    <div class="wrap" style="position:relative;z-index:1;width:100%">
+      <div class="sec-label">Come In</div>
+      <h1 class="sec-title" style="font-size:clamp(40px,6vw,84px)">Your cup is <em>waiting</em></h1>
+    </div>
+  </div>
+
+  <div class="ct-main">
+    <div class="wrap">
+      <div class="ct-grid">
+        <div>
+          <div class="ct-block rev">
+            <div class="ctb-lbl">📍 Find Us</div>
+            <div class="ctb-val">Himalayan Java Coffee — Itahari<br>Itahari-4, Sunsari District<br>Koshi Province, Nepal<br><br>
+              <a href="https://maps.google.com" target="_blank" style="color:var(--caramel);font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase">Get Directions →</a>
+            </div>
+          </div>
+          <div class="ct-block rev">
+            <div class="ctb-lbl">🕔 Opening Hours</div>
+            <div class="ctb-val">
+              <table class="hours-tbl">
+                <tr><td>Monday – Sunday</td><td>7:00 AM – 10:00 PM</td></tr>
+                <tr><td>Happy Hour</td><td>3:00 – 5:00 PM</td></tr>
+                <tr><td>Kitchen</td><td>8:00 AM – 9:30 PM</td></tr>
+                <tr><td>Private Events</td><td>By arrangement</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="ct-block rev">
+            <div class="ctb-lbl">📞 Contact</div>
+            <div class="ctb-val">
+              <a href="tel:+977">+977 (Itahari Branch)</a><br>
+              <a href="mailto:hello@himalayanjava.com">hello@himalayanjava.com</a><br><br>
+              Fastest response via WhatsApp:
+            </div>
+            <a class="wa-btn" href="https://wa.me/977?text=Hi!%20I'd%20like%20to%20visit%20Himalayan%20Java%20Itahari." target="_blank">
+              💬 &nbsp; WhatsApp Us — Quick Reply
+            </a>
+          </div>
+          <div class="ct-block rev">
+            <div class="ctb-lbl">🌐 Free WiFi</div>
+            <div class="ctb-val">Come work, study, or simply linger. High-speed complimentary WiFi for all guests. Plenty of power sockets and a quiet, welcoming atmosphere.</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="margin-bottom:28px">
+            <div class="sec-label">Reservation</div>
+            <h2 class="sec-title rev" style="font-size:clamp(26px,3.5vw,48px)">Book your <em>table</em></h2>
+          </div>
+          <form onsubmit="handleRes(event)">
+            <div class="fg"><label class="fl">Full Name *</label><input type="text" class="fi" placeholder="Your name" required></div>
+            <div class="fr">
+              <div class="fg"><label class="fl">Phone / WhatsApp *</label><input type="tel" class="fi" placeholder="+977 98..." required></div>
+              <div class="fg"><label class="fl">Email</label><input type="email" class="fi" placeholder="your@email.com"></div>
+            </div>
+            <div class="fr">
+              <div class="fg"><label class="fl">Date *</label><input type="date" class="fi" required></div>
+              <div class="fg"><label class="fl">Time *</label>
+                <select class="fi" required>
+                  <option value="">Select</option>
+                  <option>7:00 AM</option><option>8:00 AM</option><option>9:00 AM</option>
+                  <option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option>
+                  <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+                  <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
+                  <option>7:00 PM</option><option>8:00 PM</option>
+                </select>
+              </div>
+            </div>
+            <div class="fr">
+              <div class="fg"><label class="fl">Party Size</label>
+                <select class="fi">
+                  <option>1–2</option><option>3–4</option><option>5–6</option>
+                  <option>7+</option>
+                </select>
+              </div>
+              <div class="fg"><label class="fl">Occasion</label>
+                <select class="fi">
+                  <option value="">None</option>
+                  <option>Meeting / Work</option><option>Date ☕</option>
+                  <option>Birthday 🎂</option><option>Friends Gathering</option><option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg"><label class="fl">Notes</label><textarea class="fi" rows="3" placeholder="Any requests, dietary needs..."></textarea></div>
+            <button type="submit" class="fs">Confirm Reservation</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a href="#" class="soc-card soc-fb" target="_blank">
+          <div class="soc-icon">📘</div><div class="soc-name">Facebook</div><div class="soc-handle">@himalayanjava</div><div class="soc-follow">Like & Follow</div>
+        </a>
+        <a href="https://www.instagram.com/himalayanjava/" class="soc-card soc-ig" target="_blank">
+          <div class="soc-icon">📸</div><div class="soc-name">Instagram</div><div class="soc-handle">@himalayanjava</div><div class="soc-follow">Follow Us</div>
+        </a>
+        <a href="#" class="soc-card soc-tk" target="_blank">
+          <div class="soc-icon">🎵</div><div class="soc-name">TikTok</div><div class="soc-handle">@himalayanjava</div><div class="soc-follow">Follow</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-grid">
+      <div><div class="footer-logo">Himalayan Java</div><div class="footer-tag">Nepal's first specialty coffee house — Itahari's favourite café since we opened our doors here.</div><div class="footer-addr">Itahari, Sunsari District, Nepal</div></div>
+      <div><div class="fcol-title">Navigate</div><ul class="footer-links"><li><button onclick="go('home')">Home</button></li><li><button onclick="go('menu')">Menu</button></li><li><button onclick="go('events')">Events</button></li><li><button onclick="go('contact')">Contact</button></li></ul></div>
+      <div><div class="fcol-title">Visit</div><ul class="footer-links"><li><a>Reserve a Table</a></li><li><a>Group Bookings</a></li><li><a>Private Events</a></li><li><a>WiFi Workspace</a></li></ul></div>
+      <div><div class="fcol-title">Contact</div><div class="fcr">📞 <span>+977 (Itahari)</span></div><div class="fcr">📧 <span>hello@himalayanjava.com</span></div><div class="fcr">🕔 <span>Daily: 7AM – 10PM</span></div></div>
+    </div>
+    <hr class="footer-div"><div class="footer-btm"><div class="footer-copy">© 2025 Himalayan Java Coffee — All Rights Reserved</div><div class="footer-sicons"><a class="footer-si" href="#">📘</a><a class="footer-si" href="#">📸</a><a class="footer-si" href="#">🎵</a><a class="footer-si" href="https://wa.me/977">💬</a></div></div>
+  </footer>
+</div>
+
+</div><!-- end page wrap -->
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <div id="lb-wrap">
+    <button id="lb-x" onclick="closeLB()">✕</button>
+    <button class="lb-arr" id="lb-prev" onclick="lbNav(-1)">‹</button>
+    <img id="lb-img" src="" alt="">
+    <button class="lb-arr" id="lb-next" onclick="lbNav(1)">›</button>
+    <div id="lb-cap"></div>
+    <div id="lb-ctr"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="mainModal" onclick="modalBG(event)">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <div class="modal-ttl">Visit Himalayan Java Itahari</div>
+      <button class="modal-x" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-bd">
+      <p style="font-family:var(--bask);font-size:15px;font-style:italic;color:rgba(245,237,224,.6);margin-bottom:20px">Fastest reservation via WhatsApp — instant reply guaranteed.</p>
+      <a class="wa-btn" href="https://wa.me/977?text=Hi!%20I'd%20like%20to%20visit%20Himalayan%20Java%20Itahari." target="_blank" style="margin-bottom:12px;text-decoration:none">
+        💬 &nbsp; Reserve via WhatsApp
+      </a>
+      <button class="btn-line" onclick="go('contact');closeModal()" style="width:100%;justify-content:center;margin-top:10px">Open Full Reservation Form</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAB -->
+<div id="fab">
+  <a class="fab-wa" href="https://wa.me/977?text=Hi!%20Himalayan%20Java%20Itahari" target="_blank" title="WhatsApp">💬</a>
+  <button class="fab-book" onclick="openModal()">Book<br>Table</button>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ======================================================
+   THREE.JS — FLOATING COFFEE PARTICLE FIELD
+   ====================================================== */
+(function(){
+  const canvas = document.getElementById('bg-canvas');
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth,innerHeight);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x1a0f05, 0.025);
+  const cam = new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,900);
+  cam.position.set(0,0,18);
+
+  // Warm particle field
+  const N=2200;
+  const pos=new Float32Array(N*3);
+  const col=new Float32Array(N*3);
+  const palette=[
+    [0.706,0.447,0.165], // caramel
+    [0.831,0.647,0.455], // latte
+    [0.294,0.176,0.055], // roast
+    [0.96,0.87,0.75],    // cream
+    [0.243,0.353,0.243], // green
+  ];
+  for(let i=0;i<N;i++){
+    pos[i*3]=(Math.random()-.5)*70;
+    pos[i*3+1]=(Math.random()-.5)*70;
+    pos[i*3+2]=(Math.random()-.5)*65;
+    const c=palette[Math.floor(Math.random()*palette.length)];
+    col[i*3]=c[0];col[i*3+1]=c[1];col[i*3+2]=c[2];
+  }
+  const pGeo=new THREE.BufferGeometry();
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  pGeo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  scene.add(new THREE.Points(pGeo,new THREE.PointsMaterial({size:.055,vertexColors:true,transparent:true,opacity:.45})));
+
+  // Floating wireframe coffee-inspired shapes
+  const mats=[
+    new THREE.MeshBasicMaterial({color:0xb5722a,wireframe:true,transparent:true,opacity:.1}),
+    new THREE.MeshBasicMaterial({color:0xd4a574,wireframe:true,transparent:true,opacity:.07}),
+    new THREE.MeshBasicMaterial({color:0x3d5a3e,wireframe:true,transparent:true,opacity:.07}),
+  ];
+  const geos=[
+    new THREE.TorusGeometry(.85,.3,8,16),
+    new THREE.IcosahedronGeometry(1,0),
+    new THREE.OctahedronGeometry(.9),
+    new THREE.CylinderGeometry(.6,.6,1.2,8),
+  ];
+  const shapes=[];
+  for(let i=0;i<16;i++){
+    const m=new THREE.Mesh(geos[i%4],mats[i%3].clone());
+    m.position.set((Math.random()-.5)*28,(Math.random()-.5)*28,(Math.random()-.5)*22-4);
+    const s=0.4+Math.random()*1.7;
+    m.scale.setScalar(s);
+    m.userData={rx:(Math.random()-.5)*.006,ry:(Math.random()-.5)*.009,fs:.2+Math.random()*.5,fo:Math.random()*Math.PI*2,by:m.position.y};
+    scene.add(m);shapes.push(m);
+  }
+
+  let mx=0,my=0,tx=0,ty=0;
+  document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=-(e.clientY/innerHeight-.5)*2});
+  const clock=new THREE.Clock();
+  (function loop(){
+    requestAnimationFrame(loop);
+    const t=clock.getElapsedTime();
+    tx+=(mx-tx)*.03;ty+=(my-ty)*.03;
+    cam.position.x=tx*2.2;cam.position.y=ty*1.6;
+    cam.position.z=18+Math.sin(t*.06)*.4;
+    shapes.forEach(s=>{
+      s.rotation.x+=s.userData.rx;s.rotation.y+=s.userData.ry;
+      s.position.y=s.userData.by+Math.sin(t*s.userData.fs+s.userData.fo)*.85;
+    });
+    renderer.render(scene,cam);
+  })();
+  window.addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+})();
+
+/* ======================================================
+   BREW CANVAS ANIMATION — Coffee Brewing Visualisation
+   ====================================================== */
+(function(){
+  const canvas=document.getElementById('brewCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width,H=canvas.height;
+  let t=0;
+
+  // Steam particles
+  const steams=Array.from({length:28},(_,i)=>({
+    x:W*.5+(Math.random()-.5)*40,
+    y:H*.7,
+    vy:-.6-Math.random()*.8,
+    vx:(Math.random()-.5)*.3,
+    life:0,maxLife:60+Math.random()*60,
+    r:2+Math.random()*4,
+    phase:Math.random()*Math.PI*2
+  }));
+
+  // Liquid drops
+  const drops=Array.from({length:12},()=>({
+    x:W*.5+(Math.random()-.5)*20,
+    y:H*.2+Math.random()*H*.2,
+    vy:1.2+Math.random()*1.5,
+    life:0,maxLife:80+Math.random()*40,
+    r:2+Math.random()*3
+  }));
+
+  function drawCup(){
+    ctx.save();
+    const cx=W/2,cy=H*.72,cw=90,ch=60,bt=10;
+    // Cup body
+    ctx.beginPath();
+    ctx.moveTo(cx-cw/2,cy-ch);
+    ctx.lineTo(cx-cw/2+bt,cy);
+    ctx.lineTo(cx+cw/2-bt,cy);
+    ctx.lineTo(cx+cw/2,cy-ch);
+    ctx.closePath();
+    ctx.fillStyle='rgba(42,26,12,0.85)';
+    ctx.fill();
+    ctx.strokeStyle='rgba(181,114,42,0.5)';
+    ctx.lineWidth=1.5;
+    ctx.stroke();
+    // Saucer
+    ctx.beginPath();
+    ctx.ellipse(cx,cy,cw/2+8,8,0,0,Math.PI*2);
+    ctx.fillStyle='rgba(42,26,12,0.7)';ctx.fill();
+    ctx.strokeStyle='rgba(181,114,42,0.3)';ctx.stroke();
+    // Coffee surface
+    ctx.beginPath();
+    const wobble=Math.sin(t*.05)*3;
+    ctx.ellipse(cx+wobble,cy-ch+8,cw/2-10,7,0,0,Math.PI*2);
+    const grad=ctx.createRadialGradient(cx,cy-ch+8,0,cx,cy-ch+8,cw/2-10);
+    grad.addColorStop(0,'rgba(181,114,42,0.9)');
+    grad.addColorStop(.6,'rgba(101,64,12,0.8)');
+    grad.addColorStop(1,'rgba(46,26,14,0.9)');
+    ctx.fillStyle=grad;ctx.fill();
+    // Handle
+    ctx.beginPath();
+    ctx.arc(cx+cw/2+12,cy-ch/2,18,-.5,1.2);
+    ctx.strokeStyle='rgba(181,114,42,0.4)';ctx.lineWidth=7;ctx.stroke();
+    ctx.restore();
+  }
+
+  function updateAndDrawSteam(){
+    steams.forEach(s=>{
+      s.life++;
+      if(s.life>=s.maxLife){s.life=0;s.x=W*.5+(Math.random()-.5)*30;s.y=H*.64;s.vy=-.5-Math.random()*.8}
+      s.x+=s.vx+Math.sin(t*.04+s.phase)*.4;
+      s.y+=s.vy;
+      const prog=s.life/s.maxLife;
+      const alpha=prog<.2?prog/.2:prog>.7?(1-prog)/.3:1;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r*(1+prog*.5),0,Math.PI*2);
+      ctx.fillStyle=`rgba(212,165,116,${alpha*.35})`;
+      ctx.fill();
+    });
+  }
+
+  function updateAndDrawDrops(){
+    drops.forEach(d=>{
+      d.life++;
+      if(d.life>=d.maxLife){d.life=0;d.y=H*.2+Math.random()*H*.2;d.x=W*.5+(Math.random()-.5)*16;d.vy=1.2+Math.random()*1.5}
+      d.y+=d.vy;
+      const prog=d.life/d.maxLife;
+      const alpha=prog<.1?prog/.1:prog>.8?(1-prog)/.2:1;
+      ctx.beginPath();
+      ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(101,64,12,${alpha*.6})`;
+      ctx.fill();
+    });
+  }
+
+  function drawDripper(){
+    const cx=W/2,cy=H*.15,r=38;
+    // V60 cone
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(cx-r,cy);
+    ctx.lineTo(cx,cy+r*1.4);
+    ctx.lineTo(cx+r,cy);
+    ctx.closePath();
+    ctx.fillStyle='rgba(74,44,20,0.5)';ctx.fill();
+    ctx.strokeStyle='rgba(181,114,42,0.4)';ctx.lineWidth=1.5;ctx.stroke();
+    // Spiral inside
+    ctx.beginPath();
+    for(let a=0;a<Math.PI*4;a+=.1){
+      const rr=2+a*3.5;
+      const px=cx+Math.cos(a+t*.02)*rr*.4;
+      const py=cy+r*.4+Math.sin(a*.5)*rr*.15+a*3;
+      if(a===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);
+    }
+    ctx.strokeStyle='rgba(181,114,42,0.18)';ctx.lineWidth=1;ctx.stroke();
+    ctx.restore();
+  }
+
+  function frame(){
+    requestAnimationFrame(frame);
+    t++;
+    ctx.clearRect(0,0,W,H);
+    drawDripper();
+    updateAndDrawDrops();
+    updateAndDrawSteam();
+    drawCup();
+  }
+  frame();
+})();
+
+/* ======================================================
+   CURSOR
+   ====================================================== */
+const curR=document.getElementById('cur-ring'),curD=document.getElementById('cur-dot');
+let cx=0,cy=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY});
+document.querySelectorAll('a,button,[onclick]').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hover-cur'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hover-cur'));
+});
+(function cloop(){curD.style.left=cx+'px';curD.style.top=cy+'px';rx+=(cx-rx)*.14;ry+=(cy-ry)*.14;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(cloop)})();
+
+/* ======================================================
+   LOADER
+   ====================================================== */
+window.addEventListener('load',()=>{
+  document.getElementById('ldbar').style.width='100%';
+  setTimeout(()=>document.getElementById('loader').classList.add('out'),1800);
+});
+
+/* ======================================================
+   NAV
+   ====================================================== */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>50),{passive:true});
+function toggleMob(){document.getElementById('mob-menu').classList.toggle('open')}
+
+/* ======================================================
+   PAGE NAVIGATION
+   ====================================================== */
+let curPage='home',transitioning=false;
+function go(name){
+  if(name===curPage||transitioning)return;
+  transitioning=true;
+  const wipe=document.getElementById('page-wipe');
+  wipe.classList.remove('wo');wipe.classList.add('wi');
+  setTimeout(()=>{
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+name).classList.add('active');
+    window.scrollTo(0,0);
+    document.querySelectorAll('.nl').forEach(b=>b.classList.remove('active'));
+    const nb=document.getElementById('nb-'+name);if(nb)nb.classList.add('active');
+    curPage=name;
+    wipe.classList.remove('wi');wipe.classList.add('wo');
+    setTimeout(()=>{wipe.classList.remove('wo');transitioning=false;setupReveal();if(name==='menu')renderMenu();if(name==='events')renderEvents();},580);
+  },520);
+}
+
+/* ======================================================
+   REVEAL OBSERVER
+   ====================================================== */
+let revObs;
+function setupReveal(){
+  if(revObs)revObs.disconnect();
+  const page=document.getElementById('page-'+curPage);
+  const els=page.querySelectorAll('.rev,.rev-l,.rev-r');
+  revObs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*70);revObs.unobserve(e.target)}})},{threshold:.08});
+  els.forEach(el=>revObs.observe(el));
+}
+setTimeout(setupReveal,2000);
+
+/* ======================================================
+   STAT COUNTERS
+   ====================================================== */
+const statsObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(el=>{const tgt=parseInt(el.dataset.count),suf=el.dataset.suffix||'';let cur=0;const inc=Math.ceil(tgt/50);const timer=setInterval(()=>{cur=Math.min(cur+inc,tgt);el.textContent=cur+suf;if(cur>=tgt)clearInterval(timer)},28)});statsObs.unobserve(e.target)}})},{threshold:.3});
+const statsEl=document.querySelector('.stats-strip');if(statsEl)statsObs.observe(statsEl);
+
+/* ======================================================
+   LIGHTBOX
+   ====================================================== */
+let lbImgs=[],lbIdx=0;
+const mosaicImgs=[
+  {src:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1400&q=90',cap:'Himalayan Java — Warm Café Atmosphere'},
+  {src:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1400&q=90',cap:'Handcrafted Espresso — 100% Nepali Arabica'},
+  {src:'https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?w=1400&q=90',cap:'Latte Art by Certified Baristas'},
+  {src:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1400&q=90',cap:'Freshly Baked Daily'},
+  {src:'https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=1400&q=90',cap:'Nepali Arabica — From Farm to Cup'},
+  {src:'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1400&q=90',cap:'Our Story — Est. 1999'},
+];
+const igImgs=[
+  {src:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=90',cap:'The Café'},
+  {src:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200&q=90',cap:'Espresso Shot'},
+  {src:'https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?w=1200&q=90',cap:'Latte Art'},
+  {src:'https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=1200&q=90',cap:'Coffee Beans'},
+  {src:'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&q=90',cap:'Our Space'},
+  {src:'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=1200&q=90',cap:'Cold Brew'},
+];
+const aboutGal=[
+  {src:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1400&q=90',cap:'Himalayan Java Itahari'},
+  {src:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1400&q=90',cap:'Espresso'},
+  {src:'https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=1400&q=90',cap:'Our Farm in Ilam'},
+  {src:'https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?w=1400&q=90',cap:'Latte Art'},
+  {src:'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1400&q=90',cap:'The Ambiance'},
+  {src:'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=1400&q=90',cap:'Cold Brew Collection'},
+  {src:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1400&q=90',cap:'Bakery'},
+  {src:'https://images.unsplash.com/photo-1624970820327-2e5e0c1d3e34?w=1400&q=90',cap:'Coffee Beans'},
+];
+function openLB(idx,imgs){
+  lbImgs=imgs;lbIdx=idx;
+  const el=document.getElementById('lb-img');
+  el.src=imgs[idx].src;
+  document.getElementById('lb-cap').textContent=imgs[idx].cap;
+  document.getElementById('lb-ctr').textContent=(idx+1)+' / '+imgs.length;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+function lbNav(dir){
+  lbIdx=(lbIdx+dir+lbImgs.length)%lbImgs.length;
+  const img=document.getElementById('lb-img');
+  img.style.opacity='0';img.style.transform='scale(.92) translateX('+(dir*18)+'px)';
+  img.style.transition='opacity .2s,transform .2s';
+  setTimeout(()=>{
+    img.src=lbImgs[lbIdx].src;
+    document.getElementById('lb-cap').textContent=lbImgs[lbIdx].cap;
+    document.getElementById('lb-ctr').textContent=(lbIdx+1)+' / '+lbImgs.length;
+    img.style.transition='opacity .3s,transform .4s cubic-bezier(.34,1.56,.64,1)';
+    img.style.opacity='1';img.style.transform='scale(1) translateX(0)';
+  },210);
+}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLB()});
+document.addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('open'))return;if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1)});
+
+/* ======================================================
+   MENU DATA
+   ====================================================== */
+const menuDB={
+  espresso:[
+    {name:'Nepali Espresso',desc:'A concentrated double shot of 100% organic Nepali Arabica — deep, chocolatey, and bright.',price:'Rs. 180',img:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&q=85',tags:['hot','sig'],ings:['Nepali Arabica','Himalayan Water'],kcal:'5 kcal'},
+    {name:'Americano',desc:'Double shot espresso, hot water — a clean and pure Himalayan Java experience.',price:'Rs. 200',img:'https://images.unsplash.com/photo-1521302200778-33500795e128?w=700&q=85',tags:['hot'],ings:['Nepali Espresso','Hot Water'],kcal:'10 kcal'},
+    {name:'Cappuccino',desc:'Espresso, microfoam steamed milk, silky froth — classic Italian form with Nepali soul.',price:'Rs. 280',img:'https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=700&q=85',tags:['hot','sig'],ings:['Espresso','Steamed Milk','Froth'],kcal:'130 kcal'},
+    {name:'Flat White',desc:'Ristretto shots, velvety microfoam — intense coffee, less milk. Barista favourite.',price:'Rs. 300',img:'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=700&q=85',tags:['hot','sig'],ings:['Ristretto','Microfoam Milk'],kcal:'120 kcal'},
+    {name:'Latte',desc:'Three shots of smooth Arabica espresso, full-cream steamed milk, and expert latte art.',price:'Rs. 290',img:'https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?w=700&q=85',tags:['hot'],ings:['Espresso','Steamed Milk'],kcal:'150 kcal'},
+    {name:'Macchiato',desc:'Bold ristretto, just a whisper of foamed milk — for those who want coffee to speak loudly.',price:'Rs. 240',img:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&q=85',tags:['hot'],ings:['Ristretto','Foam Milk'],kcal:'45 kcal'},
+    {name:'Himalayan Cardamom Latte',desc:'Our signature — espresso, steamed milk, house cardamom-honey syrup. Inspired by Nepali chai culture.',price:'Rs. 320',img:'https://images.unsplash.com/photo-1498804103079-a6351b050096?w=700&q=85',tags:['hot','sig','new'],ings:['Espresso','Steamed Milk','Cardamom','Himalayan Honey'],kcal:'175 kcal'},
+    {name:'Affogato',desc:'A scoop of vanilla bean ice cream, drowning blissfully in a hot shot of espresso. Pure joy.',price:'Rs. 350',img:'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=700&q=85',tags:['cold','sig'],ings:['Espresso','Vanilla Bean Ice Cream'],kcal:'220 kcal'},
+  ],
+  cold:[
+    {name:'Himalayan Cold Brew',desc:'Coarsely ground Nepali Arabica steeped 12 hours in Himalayan water. Smooth, bold, never bitter.',price:'Rs. 360',img:'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=700&q=85',tags:['cold','sig'],ings:['Nepali Arabica','Himalayan Cold Water'],kcal:'5 kcal'},
+    {name:'Iced Caramel Latte',desc:'Cold espresso over ice, whole milk, house caramel drizzle — sweet, smooth, endlessly satisfying.',price:'Rs. 340',img:'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=700&q=85',tags:['cold'],ings:['Espresso','Cold Milk','Caramel','Ice'],kcal:'210 kcal'},
+    {name:'Nitro Cold Brew',desc:'Cold brew on nitrogen tap — creamy, foamy, like coffee met stout beer. Served in a classic pint.',price:'Rs. 420',img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=700&q=85',tags:['cold','sig','new'],ings:['Cold Brew','Nitrogen'],kcal:'8 kcal'},
+    {name:'Iced Matcha Latte',desc:'Premium ceremonial matcha whisked with oat milk, a shot of Himalayan honey, served iced.',price:'Rs. 350',img:'https://images.unsplash.com/photo-1516661080130-b2f53deaa5d1?w=700&q=85',tags:['cold','veg','new'],ings:['Ceremonial Matcha','Oat Milk','Himalayan Honey','Ice'],kcal:'180 kcal'},
+    {name:'Java Frappé',desc:'Blended Arabica coffee, milk, ice, topped with Chantilly cream — the original Himalayan Java cold treat.',price:'Rs. 380',img:'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=700&q=85',tags:['cold','sig'],ings:['Coffee Blend','Milk','Ice','Whipped Cream'],kcal:'320 kcal'},
+    {name:'Rose Black Tea Honey Latte',desc:'Loose-leaf black tea, rose water, Himalayan honey, cold foamed milk — fragrant and refreshing.',price:'Rs. 310',img:'https://images.unsplash.com/photo-1499638673689-79a0b5115d87?w=700&q=85',tags:['cold','veg','sig'],ings:['Black Tea','Rose Water','Honey','Foamed Milk'],kcal:'145 kcal'},
+  ],
+  brew:[
+    {name:'V60 Pour Over',desc:'Single-origin Nepali Arabica, hand-poured through Hario V60. Clean, nuanced, meditative.',price:'Rs. 320',img:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=85',tags:['hot','sig'],ings:['Single Origin Arabica','Filtered Water'],kcal:'5 kcal'},
+    {name:'AeroPress',desc:'Inverted AeroPress — concentrated, textured, complex. The barista\'s favourite brewing method.',price:'Rs. 310',img:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&q=85',tags:['hot','sig'],ings:['Nepal Arabica','Filtered Water'],kcal:'5 kcal'},
+    {name:'Chemex',desc:'Six-cup Chemex with our Nuwakot single-origin beans. Crystal clarity in every cup.',price:'Rs. 380',img:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=85',tags:['hot'],ings:['Nuwakot Arabica','Filtered Water','Chemex Filter'],kcal:'5 kcal'},
+    {name:'French Press',desc:'Full immersion, full body. Our Palpa region beans shine in this classic press.',price:'Rs. 290',img:'https://images.unsplash.com/photo-1498804103079-a6351b050096?w=700&q=85',tags:['hot'],ings:['Palpa Arabica','Hot Water'],kcal:'8 kcal'},
+  ],
+  tea:[
+    {name:'Masala Ginger Chai',desc:'House-brewed black tea with cardamom, ginger, cinnamon, clove — the Nepali way.',price:'Rs. 160',img:'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=700&q=85',tags:['hot','veg'],ings:['Black Tea','Ginger','Cardamom','Cinnamon','Milk'],kcal:'95 kcal'},
+    {name:'Himalayan Green Tea',desc:'High-altitude green tea leaves from Ilam — the world\'s finest green tea. Served plain or with honey.',price:'Rs. 180',img:'https://images.unsplash.com/photo-1516661080130-b2f53deaa5d1?w=700&q=85',tags:['hot','veg','sig'],ings:['Ilam Green Tea','Himalayan Honey (optional)'],kcal:'2 kcal'},
+    {name:'Hot Chocolate',desc:'Rich Belgian cocoa, steamed whole milk, dusting of cinnamon. Comforting perfection.',price:'Rs. 280',img:'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=700&q=85',tags:['hot','veg'],ings:['Belgian Cocoa','Whole Milk','Cinnamon'],kcal:'240 kcal'},
+    {name:'Fresh Lemonade',desc:'Hand-squeezed lemons, cane sugar, mint, sparkling water. Bright and honest.',price:'Rs. 210',img:'https://images.unsplash.com/photo-1499638673689-79a0b5115d87?w=700&q=85',tags:['cold','veg'],ings:['Fresh Lemon','Cane Sugar','Mint','Sparkling Water'],kcal:'88 kcal'},
+    {name:'Mango Lassi',desc:'Alphonso mango, full-fat yogurt, hint of cardamom, rose. A desi classic done right.',price:'Rs. 250',img:'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=700&q=85',tags:['cold','veg','sig'],ings:['Alphonso Mango','Yogurt','Cardamom','Rose'],kcal:'240 kcal'},
+  ],
+  food:[
+    {name:'Butter Croissant',desc:'Freshly baked daily — laminated dough, French-style butter, perfectly golden. Served warm.',price:'Rs. 220',img:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=700&q=85',tags:['hot','veg','sig'],ings:['Flour','French Butter','Eggs','Salt'],kcal:'310 kcal'},
+    {name:'Eggs Benedict',desc:'Sourdough muffin, smoked ham, perfectly poached eggs, house Hollandaise, chives.',price:'Rs. 580',img:'https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=700&q=85',tags:['hot','sig'],ings:['Free-Range Eggs','Smoked Ham','Hollandaise','Sourdough'],kcal:'680 kcal'},
+    {name:'Avocado Toast',desc:'House sourdough, smashed Hass avocado, dukkah, heirloom tomato, lime, chilli flakes, poached egg.',price:'Rs. 480',img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700&q=85',tags:['hot','veg','sig'],ings:['Sourdough','Hass Avocado','Poached Egg','Dukkah'],kcal:'540 kcal'},
+    {name:'Chicken Sandwich',desc:'Grilled free-range chicken, house chipotle mayo, lettuce, pickles, in a brioche bun. Daily special.',price:'Rs. 450',img:'https://images.unsplash.com/photo-1481070414801-51fd732d7184?w=700&q=85',tags:['hot','sig'],ings:['Grilled Chicken','Chipotle Mayo','Brioche Bun','Lettuce','Pickle'],kcal:'620 kcal'},
+    {name:'Cheese & Herb Omelette',desc:'Three free-range eggs, aged cheddar, fresh herbs, served with sourdough toast and fresh OJ.',price:'Rs. 380',img:'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=700&q=85',tags:['hot','veg'],ings:['Free-Range Eggs','Aged Cheddar','Mixed Herbs','Sourdough'],kcal:'490 kcal'},
+    {name:'Chocolate Brownie',desc:'Dense, fudgy, 72% Valrhona chocolate brownie. Served warm with vanilla ice cream.',price:'Rs. 280',img:'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=700&q=85',tags:['cold','veg','new'],ings:['72% Valrhona Chocolate','Butter','Eggs','Vanilla Ice Cream'],kcal:'480 kcal'},
+    {name:'Banana Walnut Loaf',desc:'House-baked, thick-sliced, with toasted walnuts and ripe Nepali bananas. Goes perfectly with espresso.',price:'Rs. 200',img:'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=700&q=85',tags:['cold','veg','sig'],ings:['Banana','Walnut','Butter','Cinnamon'],kcal:'380 kcal'},
+  ],
+  beans:[
+    {name:'Ilam Reserve — Whole Bean 250g',desc:'Single-origin from our Ilam farm. Light-medium roast. Bright citrus, jasmine, caramel. The pride of Himalayan Java.',price:'Rs. 980',img:'https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=700&q=85',tags:['sig'],ings:['Ilam Arabica','Light-Medium Roast'],kcal:''},
+    {name:'House Blend — Ground 250g',desc:'Our daily espresso blend — Nuwakot and Palpa beans. Medium roast. Chocolatey, nutty, balanced.',price:'Rs. 850',img:'https://images.unsplash.com/photo-1624970820327-2e5e0c1d3e34?w=700&q=85',tags:['sig'],ings:['Nuwakot + Palpa Arabica','Medium Roast'],kcal:''},
+    {name:'Dark Roast Espresso Beans 250g',desc:'Bold dark roast from Sindhupalchok highlands. Intense, smoky, with a molasses sweetness.',price:'Rs. 820',img:'https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=700&q=85',tags:[],ings:['Sindhupalchok Arabica','Dark Roast'],kcal:''},
+    {name:'Gift Set — 3 Origins',desc:'One bag each of our Ilam Reserve, House Blend, and Palpa Single Origin. Perfect gift for coffee lovers.',price:'Rs. 2,400',img:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=85',tags:['sig','new'],ings:['3 x 150g Bags','Gift Packaged'],kcal:''},
+  ]
+};
+
+let curTab='espresso',curFilter='all',menuLBImgs=[];
+function renderMenu(){
+  const cont=document.getElementById('menuContent');
+  const items=menuDB[curTab].filter(it=>curFilter==='all'||it.tags.includes(curFilter));
+  menuLBImgs=menuDB[curTab].map(it=>({src:it.img.replace('w=700','w=1400'),cap:it.name}));
+  const titles={espresso:'Espresso & Milk-Based',cold:'Cold Beverages',brew:'Brew Bar — Filter Methods',tea:'Tea, Infusions & More',food:'Food & Bakery',beans:'Coffee Beans & Gift Sets'};
+  const labels={espresso:'☕ Handcrafted Coffee',cold:'🧊 Cold Drinks',brew:'🫗 Specialty Brewing',tea:'🍵 Non-Coffee',food:'🥐 Kitchen',beans:'🌱 Take Home'};
+  cont.innerHTML=`
+    <div class="menu-sec-head">
+      <div><div class="sec-label">${labels[curTab]}</div><div class="msh-title">${titles[curTab]}</div></div>
+      <div class="msh-note">${items.length} items</div>
+    </div>
+    <div style="padding:0 60px 8px">
+      <div class="menu-grid-inner">
+        ${items.length===0?`<div style="padding:56px;text-align:center;font-family:var(--bask);font-size:18px;font-style:italic;color:rgba(245,237,224,.3)">No items match this filter.</div>`
+        :items.map((it)=>`
+          <div class="m-card" onclick="openLB(${menuDB[curTab].indexOf(it)},menuLBImgs)">
+            <div class="m-img">
+              <img src="${it.img}" alt="${it.name}" loading="lazy">
+              <div class="m-zoom">Zoom</div>
+              <div class="m-badges">
+                ${it.tags.includes('veg')?'<span class="badge badge-veg">🌿 Veg</span>':''}
+                ${it.tags.includes('sig')?'<span class="badge badge-sig">⭐ Signature</span>':''}
+                ${it.tags.includes('hot')?'<span class="badge badge-hot">🔥 Hot</span>':''}
+                ${it.tags.includes('cold')?'<span class="badge badge-cold">❄️ Cold</span>':''}
+                ${it.tags.includes('new')?'<span class="badge badge-new">🆕 New</span>':''}
+              </div>
+            </div>
+            <div class="m-body">
+              <div class="m-name">${it.name}</div>
+              <div class="m-desc">${it.desc}</div>
+              <div class="m-ings">${it.ings.map(i=>`<span class="m-ing">${i}</span>`).join('')}</div>
+              <div class="m-foot">
+                <div class="m-price">${it.price}</div>
+                ${it.kcal?`<div class="m-cal">${it.kcal}</div>`:''}
+              </div>
+              <a href="https://wa.me/977?text=Hi!%20I'd%20like%20to%20order%20${encodeURIComponent(it.name)}%20at%20Himalayan%20Java%20Itahari." class="m-order" target="_blank" onclick="event.stopPropagation()">Order via WhatsApp →</a>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  setTimeout(setupReveal,80);
+}
+document.getElementById('menuTabs').addEventListener('click',e=>{const b=e.target.closest('.mtab');if(!b)return;document.querySelectorAll('.mtab').forEach(x=>x.classList.remove('active'));b.classList.add('active');curTab=b.dataset.tab;renderMenu()});
+document.getElementById('menuFilters').addEventListener('click',e=>{const b=e.target.closest('.fpill');if(!b)return;document.querySelectorAll('.fpill').forEach(x=>x.classList.remove('active'));b.classList.add('active');curFilter=b.dataset.filter;renderMenu()});
+
+/* ======================================================
+   EVENTS DATA
+   ====================================================== */
+let eventsDB=[
+  {id:1,name:'Saturday Morning Cupping',cat:'cupping',date:'2025-02-22',time:'9:00 AM – 12:00 PM',desc:'Join our head roaster for an intimate guided cupping of three single-origin Nepali Arabicas. Learn to identify flavour notes — citrus, floral, chocolate. Open to all levels.',price:'Rs. 500 pp',img:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85',status:'upcoming',gallery:[]},
+  {id:2,name:'Latte Art Masterclass',cat:'workshop',date:'2025-03-01',time:'2:00 PM – 5:00 PM',desc:'Learn to pour tulips, rosettas, and free-pouring hearts from our certified baristas. Class limited to 10 — milk, coffee, and certificate included.',price:'Rs. 1,200 pp',img:'https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?w=900&q=85',status:'upcoming',gallery:[]},
+  {id:3,name:'Himalayan Java 26th Anniversary',cat:'special',date:'2025-03-08',time:'5:00 PM – 9:00 PM',desc:'Celebrating 26 incredible years. Complimentary espresso for all guests 5–6PM, special cake, live music, and the launch of our new seasonal menu.',price:'Free Entry',img:'https://images.unsplash.com/photo-1556742400-b5b7a512a6a0?w=900&q=85',status:'upcoming',gallery:[]},
+  {id:4,name:'Acoustic Friday Evening',cat:'music',date:'2025-02-14',time:'6:00 PM – 9:00 PM',desc:'Intimate acoustic set from local Itahari musician Prashant Rai. Good coffee, good music, good people. Walk-ins welcome.',price:'Free',img:'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=900&q=85',status:'live',gallery:[]},
+  {id:5,name:'New Year 2025 Opening Special',cat:'special',date:'2025-01-01',time:'7:00 AM – 2:00 AM',desc:'Rang in 2025 with our first pour of the year. Free espresso for the first 100 guests. Packed house, wonderful community energy.',price:'Free entry',img:'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=900&q=85',status:'past',gallery:[]},
+  {id:6,name:'V60 Brew Workshop',cat:'workshop',date:'2025-01-18',time:'11:00 AM – 1:00 PM',desc:'Deep dive into pour-over technique. Grind, bloom, pour. Participants took home a Hario V60 kit. Sold out event.',price:'Rs. 1,500 pp',img:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=85',status:'past',gallery:[]},
+  {id:7,name:'Christmas Community Breakfast',cat:'community',date:'2024-12-25',time:'8:00 AM – 12:00 PM',desc:'A warm holiday gathering. Pancakes, coffee, carol music, and 20% off all food for the day. Attended by 180+ guests.',price:'Free',img:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=900&q=85',status:'past',gallery:[]},
+];
+let evFilter='all';
+
+function renderEvents(){renderUpcoming();renderPast();renderAdminEvs();setupCDs();setTimeout(setupReveal,80)}
+function renderUpcoming(){
+  const list=eventsDB.filter(e=>{
+    if(evFilter==='past')return false;
+    if(evFilter!=='all'&&evFilter!=='upcoming'&&e.cat!==evFilter)return false;
+    return e.status==='upcoming'||e.status==='live';
+  });
+  const cont=document.getElementById('upcomingList');
+  if(!list.length){cont.innerHTML='<p style="font-family:var(--bask);font-style:italic;color:rgba(245,237,224,.3);padding:32px 0">No upcoming events matching this filter.</p>';return}
+  cont.innerHTML=list.map(ev=>{
+    const d=new Date(ev.date);
+    const day=d.getDate(),mon=d.toLocaleDateString('en',{month:'short'}).toUpperCase();
+    const catMap={cupping:'☕ Coffee Cupping',workshop:'🎓 Workshop',music:'🎵 Live Music',special:'✨ Special Event',community:'🤝 Community',tasting:'🍷 Tasting'};
+    return `<div class="ev-card rev">
+      <div class="ev-img">
+        <img src="${ev.img}" alt="${ev.name}" loading="lazy">
+        <div class="ev-date-badge"><div class="evdb-day">${day}</div><div class="evdb-mon">${mon}</div></div>
+        ${ev.status==='live'?'<div class="ev-live">● Live Now</div>':''}
+      </div>
+      <div class="ev-body">
+        <div class="ev-cat">${catMap[ev.cat]||'✨ Event'}</div>
+        <div class="ev-title">${ev.name}</div>
+        <div class="ev-desc">${ev.desc}</div>
+        <div class="ev-meta">
+          <div class="ev-mi">📅 ${d.toLocaleDateString('en',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div>
+          <div class="ev-mi">🕔 ${ev.time}</div>
+          <div class="ev-mi">🎫 ${ev.price}</div>
+        </div>
+        <div class="ev-cd" id="cd-${ev.id}">
+          <div class="cd-unit"><div class="cd-num" id="cdd-${ev.id}">--</div><div class="cd-lbl">Days</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><div class="cd-num" id="cdh-${ev.id}">--</div><div class="cd-lbl">Hours</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><div class="cd-num" id="cdm-${ev.id}">--</div><div class="cd-lbl">Mins</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit"><div class="cd-num" id="cds-${ev.id}">--</div><div class="cd-lbl">Secs</div></div>
+        </div>
+        <div class="ev-acts">
+          <a href="https://wa.me/977?text=Hi!%20I'd%20like%20to%20book%20for%20${encodeURIComponent(ev.name)}%20at%20Himalayan%20Java%20Itahari." class="btn-fill" target="_blank">Book Spot</a>
+          <button class=\"btn-line\" onclick=\"openEvPhoto(${ev.id})\">View Photo</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function renderPast(){
+  const list=eventsDB.filter(e=>{
+    if(evFilter==='upcoming')return false;
+    if(evFilter!=='all'&&evFilter!=='past'&&e.cat!==evFilter)return false;
+    return e.status==='past';
+  });
+  const cont=document.getElementById('pastList');
+  if(!list.length){cont.innerHTML='<p style="font-family:var(--bask);font-style:italic;color:rgba(245,237,224,.3);padding:32px 0;grid-column:1/-1">No past events found.</p>';return}
+  cont.innerHTML=list.map((ev,i)=>`
+    <div class=\"past-card ${i===0?'feat':''} rev\" onclick=\"openEvPhoto(${ev.id})\">
+      <div class="past-iw">
+        <img src="${ev.img}" alt="${ev.name}" loading="lazy">
+        <div class="past-ov">
+          <div class="past-ov-cat">${new Date(ev.date).toLocaleDateString('en',{year:'numeric',month:'long',day:'numeric'})}</div>
+          <div class="past-ov-title">${ev.name}</div>
+          <div class="past-ov-date">${ev.time}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function renderAdminEvs(){
+  const cont=document.getElementById('adminEvRows');
+  if(!eventsDB.length){cont.innerHTML='<p style="font-family:var(--bask);font-style:italic;color:rgba(245,237,224,.3);padding:16px 0">No events yet.</p>';return}
+  cont.innerHTML=eventsDB.map(ev=>`
+    <div class="admin-ev-row">
+      <div class="admin-ev-thumb"><img src="${ev.img}" alt="${ev.name}" loading="lazy"></div>
+      <div><div class="admin-ev-name">${ev.name}</div><div class="admin-ev-date">${new Date(ev.date).toLocaleDateString('en',{year:'numeric',month:'short',day:'numeric'})} · ${ev.time}</div></div>
+      <div class="admin-ev-status s-${ev.status}">${ev.status}</div>
+      <div class="admin-btns">
+        <button class="abtn" onclick="toggleEvStatus(${ev.id})">Toggle</button>
+        <button class="abtn danger" onclick="delEv(${ev.id})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+function setupCDs(){
+  const tick=()=>{eventsDB.filter(e=>e.status==='upcoming'||e.status==='live').forEach(ev=>{const tgt=new Date(ev.date+'T09:00:00'),now=new Date(),diff=tgt-now;if(diff<=0)return;const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=String(v).padStart(2,'0')};set('cdd-'+ev.id,d);set('cdh-'+ev.id,h);set('cdm-'+ev.id,m);set('cds-'+ev.id,s)})};
+  tick();if(window._cdi)clearInterval(window._cdi);window._cdi=setInterval(tick,1000);
+}
+document.addEventListener('click',e=>{const b=e.target.closest('.evtab');if(!b||!b.dataset.evf)return;evFilter=b.dataset.evf;document.querySelectorAll('.evtab').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderEvents()});
+
+let uploadedImgs=[];
+function prevImgs(e){uploadedImgs=Array.from(e.target.files);const p=document.getElementById('imgPrev');p.innerHTML=uploadedImgs.map((f,i)=>`<div class="prev-thumb"><img src="${URL.createObjectURL(f)}" alt="P${i}"><button class="prev-rm" onclick="uploadedImgs.splice(${i},1)">✕</button></div>`).join('')}
+function submitEv(e){
+  e.preventDefault();
+  const name=document.getElementById('evName').value.trim();
+  const cat=document.getElementById('evCat').value;
+  const date=document.getElementById('evDate').value;
+  const time=document.getElementById('evTime').value||'TBA';
+  const desc=document.getElementById('evDesc').value.trim()||'A special event at Himalayan Java Itahari.';
+  const price=document.getElementById('evPrice').value.trim()||'Contact for info';
+  const status=document.getElementById('evStatus').value;
+  const imgUrl=uploadedImgs.length?URL.createObjectURL(uploadedImgs[0]):'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85';
+  eventsDB.unshift({id:Date.now(),name,cat,date,time,desc,price,img:imgUrl,status,gallery:[]});
+  renderEvents();clearEvForm();showToast('✓ "'+name+'" added!');
+}
+function clearEvForm(){document.getElementById('adminForm').reset();document.getElementById('imgPrev').innerHTML='';uploadedImgs=[]}
+function delEv(id){if(!confirm('Delete event?'))return;eventsDB=eventsDB.filter(e=>e.id!==id);renderEvents();showToast('Event removed.')}
+function toggleEvStatus(id){const ev=eventsDB.find(e=>e.id===id);if(!ev)return;const c={upcoming:'live',live:'past',past:'upcoming'};ev.status=c[ev.status];renderEvents();showToast('Status: '+ev.status)}
+const uz=document.getElementById('uploadZ');
+if(uz){uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('drag-on')});uz.addEventListener('dragleave',()=>uz.classList.remove('drag-on'));uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('drag-on');uploadedImgs=Array.from(e.dataTransfer.files).filter(f=>f.type.startsWith('image/'));const p=document.getElementById('imgPrev');p.innerHTML=uploadedImgs.map((f,i)=>`<div class="prev-thumb"><img src="${URL.createObjectURL(f)}" alt="P${i}"><button class="prev-rm">✕</button></div>`).join('')})}
+
+/* ======================================================
+   MODALS & FORMS
+   ====================================================== */
+function openModal(){document.getElementById('mainModal').classList.add('open')}
+function closeModal(){document.getElementById('mainModal').classList.remove('open')}
+function modalBG(e){if(e.target===e.currentTarget)closeModal()}
+function handleRes(e){e.preventDefault();showToast('✓ Reservation confirmed! We\'ll WhatsApp you shortly.');e.target.reset()}
+
+/* ======================================================
+   TOAST
+   ====================================================== */
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
+
+function openEvPhoto(id){
+  const ev = eventsDB.find(e=>e.id===id);
+  if(!ev) return;
+  const hiSrc = ev.img.replace('w=900','w=1400');
+  openLB(0,[{src:hiSrc, cap:ev.name}]);
+}
+</script>
+</body>
+</html>
